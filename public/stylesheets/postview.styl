@@ -1,0 +1,56 @@
+@import default
+form.newpost
+	text-align: center
+	fieldset
+		margin-bottom: 10px
+		border: 1px dashed white
+		text-align: left
+		min-width: 640px
+	label
+		background-color: white
+		text-align: left
+		display: inline-block
+		padding: 2px
+		margin: 2px
+		min-width: 120px
+	input
+		width: 360px
+	input.short
+		width: 120px
+	textarea
+		width: 98% !important
+em.star
+	float: right
+	display: inline-block
+.sibox
+	display: inline-block
+	box-shadow: 0 0 2px gray
+	min-width: 100px
+	padding: 2px
+	color: #5a5854
+	background-color: #f2f2f2
+	border: 1px solid #bdbdbd
+	background-position: 8px 9px
+	margin-bottom: 5px
+	margin-top: 10px
+	margin-left: 4px
+.hidden
+	display: none
+.myTag
+	@extend .sibox
+	min-width: 0
+	background-color: orange
+.floatLeft
+	float: left
+	width: 70%
+.tagBox
+	@extend .sibox
+	display: block
+	float: right
+	max-width: 25%
+label.error
+	color: white
+	background-color: #777 !important
+#sidebar
+	float: left
+	position: relative

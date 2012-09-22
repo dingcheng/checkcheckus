@@ -1,0 +1,74 @@
+body,html
+	font-family: "Lucida Grande", Helvetica, Arial, sans-serif
+	text-align: center
+	background-color: #bbb
+	color: #555
+	height: 100%
+	*
+		border-radius: 5px
+.plump
+	background-color: #ff9933
+	color: black
+	box-shadow: 0 0 3px black
+	text-decoration: none
+	a
+		text-decoration: none
+input,textarea,span.likeinput,select
+	box-shadow: 0 0 2px gray
+	font-size: 120%
+	color: #5a5854
+	background-color: #f2f2f2
+	border: 1px solid #bdbdbd
+	background-repeat: no-repeat
+	background-position: 8px 9px
+	display: inline
+	margin-bottom: 5px
+	margin-top: 10px
+	margin-left: 4px
+textarea
+	max-width: 900px
+a
+	text-decoration: none
+	color: #333
+	&:hover
+		color: black !important
+		background-color: white
+	&:visited
+		color: #777
+	&.tag
+		display: inline-block
+		margin-left: 10px
+		background-color: wheat
+		color: #222
+		&:hover
+			color: black !important
+			background-color: white
+legend
+	@extend .plump
+#container
+	max-width: 940px
+	min-width: 640px
+	margin: auto auto
+	padding: 10px 10px
+	background-color: #ccc
+	box-shadow: 0 0 10px gray
+#sidebar
+	border-radius: 10px
+	padding: 0 0
+	text-align: center
+	text-shadow: 2px 2px 5px gray
+	font-size: 200%
+	position: fixed
+	ul
+		list-style-type: none
+		margin: 0 0
+		padding: 0
+	li
+		margin: 5px
+		border-bottom: 3px solid #ddd
+	a
+		color: black !important
+.prompt
+	@extend input
+	display: none
+	position: fixed

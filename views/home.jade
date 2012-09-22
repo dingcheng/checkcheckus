@@ -1,0 +1,35 @@
+extends layout
+
+block scripts
+	script
+		$(document).ready(function(){
+			$('a').click(function(event){
+				event.preventDefault();
+				$('#searchbox').val($(this).attr('class'));
+				$('form').submit();
+				})
+			});
+
+block content
+	#container
+		h2
+			span.plump
+				| Buf's List
+		.centerbox
+			form(method='post')
+				div
+					input#searchbox(type='text',name='searchbox')
+					input(type='submit',name='search',value='搜索')
+				div
+					input(type='submit',name='post',value='发布信息')
+		.centerbox
+			.linebox
+				span
+					a(href='javascript:;', class='汽车 车') 汽车
+				span
+					a(href='javascript:;', class='租房 房子 房') 租房
+			.linebox
+				span
+					a(href='javascript:;', class='交易 买卖 甩卖') 甩卖
+				span
+					a(href='javascript:;', class='交友 社交 活动') 交友

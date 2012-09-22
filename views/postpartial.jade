@@ -1,0 +1,6 @@
+span.postpartial
+	a(href='mailto://#{item.email}') #{item.email}
+span.postpartial
+	| 电话：#{item.cellnum}
+textarea.postpartial(rows='3',cols='20',readonly='readonly')
+	| #{item.content}

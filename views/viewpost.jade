@@ -1,0 +1,49 @@
+extends layout
+
+block scripts
+	script
+		$(document).ready(function(){
+			$(':empty').hide();
+			});
+
+
+block stylesheet
+	link(rel='stylesheet', href='/stylesheets/postview.css')
+
+block content
+	include sidebar
+	#container
+		.tunebar
+			form.newpost
+				fieldset
+					legend 基本信息
+					div
+						label 标题：
+						span.sibox
+							| #{item.title}
+					div
+						label 价格：
+						span.sibox
+							| #{item.price}
+					div
+						label 标签：
+						span.sibox
+							-for (var i = 0; i < item.tags.length; i++)
+								a.tag(href='/tag/#{item.tags[i]}')
+									| ##{item.tags[i]}
+					div
+						label 发布日期：
+						span.sibox
+							| #{item.date.toDateString()}
+					div
+						label 发帖人邮箱：
+						span.sibox
+							a(href='mailto:#{item.email}') #{item.email}
+					div
+						label 发帖人手机号：
+						span.sibox
+							| #{item.cellnum}
+				fieldset
+					legend 内容
+					textarea(rows='10',cols='50',readonly='readonly')
+						| #{item.content}

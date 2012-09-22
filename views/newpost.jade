@@ -1,0 +1,79 @@
+extends layout
+
+block scripts
+	script(src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js')
+	script(src='/javascripts/bootstrap-tagmanager2.js')
+	script(src='/javascripts/posting.js')
+
+block stylesheet
+	link(rel='stylesheet', href='/stylesheets/postview.css')
+	//link(rel='stylesheet', href='/stylesheets/bootstrap-tagmanager.css')
+
+block content
+	include sidebar
+	#container
+		form.newpost(method='post',id='postform')
+			fieldset
+				legend 基本信息
+				.floatLeft
+					div
+						label 标题
+							em.star *
+						input(type='text',name='title')
+					div
+						label 标签(Tags)
+							em.star *
+						input.short(type='text',name='tags',id='tags')
+					div
+						label 价格
+						input(type='text',name='price')
+					div
+						label Email
+							em.star *
+						input(type='text',name='email')
+					div
+						label 手机
+						input(type='text',name='cellnum')
+					div
+						label Zip Code
+							em.star *
+						input(type='text',name='zipcode')
+					div
+						label 地址
+						input(type='text',name='address')
+				.tagBox
+					| 添加符合的常用标签能让大家更容易发现你的帖子
+					hr
+					a.tag(href='javascript:void(0)') #交易,买卖
+					a.tag(href='javascript:void(0)') #汽车,车
+					a.tag(href='javascript:void(0)') #家具
+					a.tag(href='javascript:void(0)') #电子产品
+					a.tag(href='javascript:void(0)') #书,书籍
+					a.tag(href='javascript:void(0)') #教材
+					a.tag(href='javascript:void(0)') #玩具
+					a.tag(href='javascript:void(0)') #化妆品
+					hr
+					a.tag(href='javascript:void(0)') #租
+					a.tag(href='javascript:void(0)') #出租
+					a.tag(href='javascript:void(0)') #求租
+					a.tag(href='javascript:void(0)') #短租
+					a.tag(href='javascript:void(0)') #租房
+					hr
+					a.tag(href='javascript:void(0)') #出行
+					a.tag(href='javascript:void(0)') #拼车
+					a.tag(href='javascript:void(0)') #旅游
+					a.tag(href='javascript:void(0)') #度假
+					hr
+					a.tag(href='javascript:void(0)') #活动
+					a.tag(href='javascript:void(0)') #聚会
+					a.tag(href='javascript:void(0)') #联谊
+					a.tag(href='javascript:void(0)') #新生
+					a.tag(href='javascript:void(0)') #演出
+					a.tag(href='javascript:void(0)') #演唱会
+			fieldset
+				legend 内容
+				textarea(rows='10',cols='50',name='content')
+			//fieldset
+			input(type='submit',name='post',value='提交')
+	.prompt
+		| 敲回车,Tab,逗号来分隔标签
