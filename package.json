@@ -10,7 +10,6 @@
     "jade": "*",
     "stylus": "*",
     "jshashes": "*",
-    "mongoose": "*",
-    "node-segment": "0.0.2"
+    "mongoose": "*"
   }
 }
