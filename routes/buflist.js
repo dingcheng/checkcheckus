@@ -30,7 +30,7 @@ exports.valizip=function(req,res){
 }
 //Home page
 exports.home=function(req,res){
-	console.log('ip:',req.ip,Date());
+	//console.log('ip:',req.ip,Date());
 	res.render('home', {title: '主页'});
 };
 //View post
