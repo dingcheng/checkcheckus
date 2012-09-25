@@ -2,7 +2,7 @@ $.validator.setDefaults({ignore:''});
 $(document).ready(function(){
 	//leaving page with dirty data prompt -- Todo
 	//validate the form, using jquery validation plugin
-	$("#postform").validate({ignore:'',
+	$("#postform").validate({ignore:'#upImg',
         rules: {
             title: "required",
             hiddenTagList: "required",
@@ -72,5 +72,25 @@ $(document).ready(function(){
     $('input[name="hiddenTagList"]').change(function(event){
         if ($.trim($(this).val())!=='')
             $('label[for="hiddenTagList"]').remove();
+    });
+    //Validate file size
+    var reader;
+    $('#upImg').change(function(event){
+        reader = new FileReader();
+        $('#imgerr').remove();
+        $('#imgpre').remove();
+        if(this.files.length==0) return;
+        if (this.files[0].size>5242880) {//This number is 5MB in bytes
+            $('<label class="error" id="imgerr">请上传5MB以内的图片</label>').insertAfter($(this));
+            $(this).val('');
+        }
+        else{
+            $('<div><img id="imgpre"></div>').insertAfter($(this));
+            reader.onload=function(e){
+                $('#imgpre').attr('src', e.target.result)
+                    .width(300);
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
     })
 });

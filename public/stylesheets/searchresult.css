@@ -25,6 +25,7 @@ input,
 textarea,
 span.likeinput,
 select,
+img,
 .prompt {
   box-shadow: 0 0 2px #808080;
   font-size: 120%;
@@ -37,6 +38,9 @@ select,
   margin-bottom: 5px;
   margin-top: 10px;
   margin-left: 4px;
+}
+img {
+  display: inline-block !important;
 }
 textarea {
   max-width: 900px;

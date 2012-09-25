@@ -12,7 +12,7 @@ block stylesheet
 block content
 	include sidebar
 	#container
-		form.newpost(method='post',id='postform')
+		form.newpost(method='post',id='postform',enctype='multipart/form-data')
 			fieldset
 				legend 基本信息
 				.floatLeft
@@ -73,6 +73,8 @@ block content
 			fieldset
 				legend 内容
 				textarea(rows='10',cols='50',name='content')
+				label 图片
+				input(type='file',name='img',id='upImg',accept='image/*')
 			//fieldset
 			input(type='submit',name='post',value='提交')
 	.prompt

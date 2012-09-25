@@ -47,3 +47,6 @@ block content
 					legend 内容
 					textarea(rows='10',cols='50',readonly='readonly')
 						| #{item.content}
+					-if(item.hasimg)
+						div
+							img(src='/getimg/#{item._id}',width='300px')

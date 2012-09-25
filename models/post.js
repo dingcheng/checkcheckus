@@ -31,7 +31,9 @@ var PostSchema = new Schema({
     tkeys:		{type:[String], index:true, lowercase:true},
     ckeys:		{type:[String], index:true, lowercase:true},
     latlon:		{type:[Number], index:'2d'},
-    user:		{type:Schema.ObjectId, ref:'User', index:true}
+    user:		{type:Schema.ObjectId, ref:'User', index:true},
+    hasimg:     Boolean,
+    img:        {data: Buffer, ctype:String}
 }, {expires: '15d'});
 
 

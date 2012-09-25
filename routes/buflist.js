@@ -2,12 +2,25 @@ var mongoose = require('mongoose'),
 	Post = mongoose.model('Post'),
 	User = mongoose.model('User'),
 	Zipcode = mongoose.model('Zipcode'),
-	ObjectId = mongoose.Types.ObjectId;
+	ObjectId = mongoose.Types.ObjectId,
+	fs = require('fs');
 var Segment = require('node-segment').Segment;
 var segment = new Segment();
 var PAGESIZE = 20;
 segment.useDefault();
 
+
+exports.getimg=function(req,res){
+	var id = req.params.id;
+	Post.findById(id,'img',function(err,result){
+		if(err||result==null){
+			res.redirect('/notfound');
+			return;
+		}
+		res.contentType(result.img.ctype);
+		res.send(result.img.data);
+	});
+}
 //Ajax POST request handler, renders partial html to put into page
 exports.ajax_postreq=function(req,res){
 	var id = req.body.id;
@@ -37,7 +50,7 @@ exports.home=function(req,res){
 exports.viewpost=function(req,res){
 	var id = ObjectId(req.params.id);
 	Post.findById(id,
-		"title price tags date email cellnum content",
+		"title price tags date email cellnum content hasimg",
 		function(err, result){
 			if (!err&&result)
 				res.render('viewpost',{title:result.title,item:result});
@@ -168,7 +181,7 @@ exports.newpost_postreq=function(req,res){
 		return;
 	};
 	var post = req.body;
-	new Post({
+	var postObj = {
 		title: post.title,
 		content: post.content+"\r\n#"+post.hiddenTagList,
 		email: post.email,
@@ -177,14 +190,36 @@ exports.newpost_postreq=function(req,res){
 		price: post.price,
 		tags: post.hiddenTagList.toLowerCase().split(','),
 		cellnum: post.cellnum,
-	}).save(function(err, result){
-		if(err)
-			res.render('err',
-				{title: "500 - Internal Server Error",
-				errmsg:'Cannot save data to db.',
-				showFullNav: false, status: 404, url: req.url}
-				);
-		else
-			res.redirect('/post/'+result._id.toString());
-	})
+	};
+	if (req.files.length>0){
+		fs.readFile(req.files.img.path, function(err, data){
+			postObj.img={};
+			postObj.img.data=data;
+			postObj.img.ctype=req.files.img.type;
+			postObj.hasimg = true;
+			new Post(postObj).save(function(err, result){
+			if(err)
+				res.render('err',
+					{title: "500 - Internal Server Error",
+					errmsg:'Cannot save data to db.',
+					showFullNav: false, status: 404, url: req.url}
+					);
+			else
+				res.redirect('/post/'+result._id.toString());
+			});
+		});
+		return;
+	}
+	else{
+		new Post(postObj).save(function(err, result){
+			if(err)
+				res.render('err',
+					{title: "500 - Internal Server Error",
+					errmsg:'Cannot save data to db.',
+					showFullNav: false, status: 404, url: req.url}
+					);
+			else
+				res.redirect('/post/'+result._id.toString());
+		});
+	}
 }
