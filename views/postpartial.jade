@@ -4,3 +4,5 @@ span.postpartial
 	| 电话：#{item.cellnum}
 textarea.postpartial(rows='3',cols='20',readonly='readonly')
 	| #{item.content}
+-if(item.hasimg)
+	img(src='/getimg/#{item._id}', height='200px')

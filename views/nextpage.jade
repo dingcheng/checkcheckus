@@ -2,7 +2,10 @@
 	- var item = items[i]
 	- var date = item.date
 	.item(id=item._id)
-		| #{date.getMonth()+1+"/"+date.getDate()+"/"+date.getFullYear()} - $#{item.price} - 
+		| #{date.getMonth()+1+"/"+date.getDate()+"/"+date.getFullYear()} - $#{item.price}
+		-if(item.hasimg)
+			a.tag(href='javascript:void(0)') 图!
+		| - 
 		a(href='/post/#{item._id}') #{item.title}
 		span
 			-for(var j=0;j<item.tags.length;j++)

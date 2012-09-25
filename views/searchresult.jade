@@ -50,17 +50,7 @@ block content
 					a.plump(href='javascript:;',id='next') 下一页
 		hr/
 		#searchresults
-			-for(var i=0;i<items.length;i++)
-				- var item = items[i]
-				- var date = item.date
-				.item(id=item._id)
-					| #{date.getMonth()+1+"/"+date.getDate()+"/"+date.getFullYear()} - $#{item.price} - 
-					a(href='/post/#{item._id}') #{item.title}
-					span
-						| |
-						-for(var j=0;j<item.tags.length;j++)
-							a.tag(href='/tag/#{item.tags[j]}') ##{item.tags[j]}
-					.postcontent.hidden
+			include nextpage
 	.prompt
 		| 点击橙色区域查看详情
 

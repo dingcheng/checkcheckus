@@ -24,7 +24,7 @@ exports.getimg=function(req,res){
 //Ajax POST request handler, renders partial html to put into page
 exports.ajax_postreq=function(req,res){
 	var id = req.body.id;
-	Post.findById(id,'email cellnum content',function(err,result){
+	Post.findById(id,'email cellnum content hasimg',function(err,result){
 		res.render('postpartial',{item:result});
 	})
 }
@@ -142,7 +142,7 @@ exports.search_postreq=function(req,res){
     	}
 	}
 	//Execute the query
-	var myQuery = Post.find(queryObj,"_id title price tags date");
+	var myQuery = Post.find(queryObj,"_id title price tags date hasimg");
 	myQuery.sort(sortby).skip(PAGESIZE*(page-1))
 		.limit(PAGESIZE)
 		.exec(function(err,results){
@@ -191,7 +191,8 @@ exports.newpost_postreq=function(req,res){
 		tags: post.hiddenTagList.toLowerCase().split(','),
 		cellnum: post.cellnum,
 	};
-	if (req.files.length>0){
+	console.log(req.files);
+	if ('img' in req.files&&req.files.img.size>0&&req.files.img.size<5242880){
 		fs.readFile(req.files.img.path, function(err, data){
 			postObj.img={};
 			postObj.img.data=data;
