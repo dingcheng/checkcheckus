@@ -9,7 +9,6 @@
 		a(href='/post/#{item._id}') #{item.title}
 		span
 			-for(var j=0;j<item.tags.length;j++)
-				|  | 
 				a.tag(href='/tag/#{item.tags[j]}') ##{item.tags[j]}
 		.postcontent.hidden
 input(type='hidden',name='from',value=showingfrom)

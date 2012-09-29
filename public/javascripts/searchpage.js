@@ -29,7 +29,7 @@ $(document).ready(function(){
 	// hover prompt
 	$('.item').hover(function(e){
 		var p = $('.prompt');
-		p.css('top', $(document).height()/2-p.height())
+		p.css('top', $(window).height()/2-p.height())
             .css('left', 5)
             .show();
     },function(e){

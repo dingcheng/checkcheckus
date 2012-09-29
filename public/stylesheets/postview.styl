@@ -3,7 +3,7 @@ form.newpost
 	text-align: center
 	fieldset
 		margin-bottom: 10px
-		border: 1px dashed white
+		border: 1px dashed black
 		text-align: left
 		min-width: 640px
 	label
@@ -23,34 +23,25 @@ em.star
 	float: right
 	display: inline-block
 .sibox
+	@extend input
 	display: inline-block
-	box-shadow: 0 0 2px gray
-	min-width: 100px
-	padding: 2px
-	color: #5a5854
-	background-color: #f2f2f2
-	border: 1px solid #bdbdbd
-	background-position: 8px 9px
-	margin-bottom: 5px
-	margin-top: 10px
-	margin-left: 4px
+	min-width: 200px
+	text-align: right
 .hidden
 	display: none
 .myTag
-	@extend .sibox
+	@extend input
+	background-color: themecolor
+	box-shadow: none
 	min-width: 0
-	background-color: orange
 .floatLeft
 	float: left
 	width: 70%
 .tagBox
-	@extend .sibox
+	@extend input
 	display: block
 	float: right
 	max-width: 25%
 label.error
 	color: white
 	background-color: #777 !important
-#sidebar
-	float: left
-	position: relative

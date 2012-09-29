@@ -1,23 +1,24 @@
+themecolor = #66ccff
 body,html
 	font-family: "Lucida Grande", Helvetica, Arial, sans-serif
 	text-align: center
-	background-color: #bbb
+	background-color: #ddd
 	color: #555
-	height: 100%
-	*
-		border-radius: 5px
+*
+	border-radius: 5px
 .plump
-	background-color: #ff9933
+	background-color: themecolor
 	color: black
 	box-shadow: 0 0 3px black
 	text-decoration: none
 	a
 		text-decoration: none
-input,textarea,span.likeinput,select,img
-	box-shadow: 0 0 2px gray
+		&:visited
+			color: black
+input,textarea,span.likeinput,select,img.ip
 	font-size: 120%
-	color: #5a5854
-	background-color: #f2f2f2
+	color: black
+	background-color: white
 	border: 1px solid #bdbdbd
 	background-repeat: no-repeat
 	background-position: 8px 9px
@@ -25,51 +26,51 @@ input,textarea,span.likeinput,select,img
 	margin-bottom: 5px
 	margin-top: 10px
 	margin-left: 4px
+	padding: 2px
+	&:hover
+		box-shadow: 0 0 2px black
+	&:active
+		box-shadow: inset 0 0 2px black
+input[type='text']
+	max-width: 80%
 img
 	display: inline-block !important
 textarea
 	max-width: 900px
 a
 	text-decoration: none
-	color: #333
+	color: black
 	&:hover
 		color: black !important
 		background-color: white
 	&:visited
-		color: #777
-	&.tag
-		display: inline-block
-		margin-left: 10px
-		background-color: wheat
-		color: #222
-		&:hover
-			color: black !important
-			background-color: white
+		color: #660000
+.tag
+	display: inline-block
+	margin: 0 5px
+	background-color: wheat
+	color: #222	
 legend
 	@extend .plump
 #container
 	max-width: 940px
-	min-width: 640px
-	margin: auto auto
+	min-width: 500px
+	margin: auto
+	margin-top: 30px
 	padding: 10px 10px
-	background-color: #ccc
-	box-shadow: 0 0 10px gray
+	background-color: #eee
+	box-shadow: 0 0 2px black
 #sidebar
-	border-radius: 10px
-	padding: 0 0
-	text-align: center
-	text-shadow: 2px 2px 5px gray
-	font-size: 200%
+	width: 99%
+	background-color: themecolor
 	position: fixed
-	ul
-		list-style-type: none
-		margin: 0 0
-		padding: 0
-	li
+	top: 5px
+	text-align: left
+	text-shadow: 2px 2px 5px gray
+	font-size: 120%
+	span
 		margin: 5px
-		border-bottom: 3px solid #ddd
-	a
-		color: black !important
+		padding: 3px
 .prompt
 	@extend input
 	display: none
