@@ -9,7 +9,8 @@
     "express": "3.0.0rc4",
     "jade": "*",
     "stylus": "*",
-    "jshashes": "*",
-    "mongoose": "*"
+    "bcrypt": "0.7.2",
+    "mongoose": "*",
+    "nodemailer": "0.3.28"
   }
 }

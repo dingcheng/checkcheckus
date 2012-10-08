@@ -13,6 +13,9 @@ block stylesheet
 block content
 	include sidebar
 	#container
+		-if (!item.acti)
+			h1
+				| 该贴未被激活，不会被搜索功能包含，请用我们发送至您邮箱的链接激活该贴。
 		.tunebar
 			form.newpost
 				fieldset
@@ -38,7 +41,8 @@ block content
 					div
 						label 发帖人邮箱：
 						span.sibox
-							a(href='mailto:#{item.email}') #{item.email}
+							-var mailargs = 'subject=RE:'+encodeURIComponent(item.title)+'&body=http://www.checkcheck.us/post/'+item._id
+							a(href='mailto:#{item.email}?'+mailargs) #{item.email}
 					div
 						label 发帖人手机号：
 						span.sibox

@@ -3,12 +3,100 @@ var mongoose = require('mongoose'),
 	User = mongoose.model('User'),
 	Zipcode = mongoose.model('Zipcode'),
 	ObjectId = mongoose.Types.ObjectId,
-	fs = require('fs');
+	nmlr = require('nodemailer'),
+	jsha = require('jshashes');
+var smtpTransport=nmlr.createTransport('SMTP',{
+	service:'Gmail',
+	auth:{
+		user: 'admin@checkcheck.us',
+		pass: 'D1n0d3j5'
+	}
+});
 var Segment = require('node-segment').Segment;
 var segment = new Segment();
 var PAGESIZE = 20;
 segment.useDefault();
 
+//Ajax POST request handler, renders partial html to put into page
+exports.ajax_postreq=function(req,res){
+	var id = req.body.id;
+	Post.findById(id,'email cellnum content hasimg',function(err,result){
+		res.render('postpartial',{item:result});
+	})
+}
+
+//Posting new post
+exports.newpost_postreq=function(req,res){
+	if (req.body.submit=='取消') {
+		res.redirect('/');
+		return;
+	};
+	var post = req.body;
+	var postObj = {
+		title: post.title,
+		content: post.content,
+		email: post.email,
+		address: post.address,
+		zip: post.zipcode,
+		price: Number(post.price),
+		tags: post.hiddenTagList.toLowerCase().split(','),
+		cellnum: post.cellnum,
+		acti: false,
+		actcode: jsha.SHA1().b64(Date())
+	};
+	//Save image to post only if there is one, and the size is in range (0,5) MB.
+	if (post.imdata){
+		var encodeheader = 'data:'+post.ctype+';base64,';
+		post.imdata = post.imdata.replace(encodeheader,'');
+		postObj.img={};
+		postObj.img.data=new Buffer(post.imdata, 'base64');
+		postObj.img.ctype=post.ctype;
+		postObj.img.h=post.imgheight;
+		postObj.hasimg = true;
+	}
+	//Similarly save thumbnail, namely the first image if there're multiple images
+	if (post.thumb){
+		var encodeheader = 'data:'+post.ctype+';base64,';
+		post.thumb = post.thumb.replace(encodeheader,'');
+		postObj.thumb={};
+		postObj.thumb.data=new Buffer(post.thumb, 'base64');
+		postObj.thumb.ctype=post.ctype;
+		postObj.thumb.h=post.theight;
+		postObj.hasthumb = true;
+	}
+
+	//Otherwise, save only text part of the post
+	new Post(postObj).save(function(err, result){
+		if(err)
+			res.render('err',
+				{title: "500 - Internal Server Error",
+				errmsg:'Cannot save data to db. '+err,
+				showFullNav: false, status: 500, url: req.url}
+				);
+		else
+		{
+			var actlink = "http://localhost/activate/"+result._id+"/"+encodeURIComponent(postObj.actcode);
+			var mailOptions = {
+				from: "✔Notification <admin@checkcheck.us>", // sender address
+				to: post.email, // list of receivers
+				subject: "✔checkcheck.us 新帖激活邮件", // Subject line
+				html: "<h1>点击链接激活您的新帖：</h1><a href='"+actlink+"'>"+actlink+"</a>"
+			};
+			smtpTransport.sendMail(mailOptions,
+				function(err,mailresult){
+					if (err) {
+						console.error("sending email to "+post.email+" for post "+result._id+" failed");
+						res.render('err',
+							{title: "500 - Internal Server Error",
+							errmsg:'Cannot send activation email, please try again.',
+							showFullNav: false, status: 500, url: req.url}
+							);
+					}
+			});
+			res.redirect('/preview/'+result._id);
+		}
+	});
+}
 
 //Searching handler
 exports.search_postreq=function(req,res){
@@ -94,11 +182,10 @@ exports.search_postreq=function(req,res){
 			if (req.body.cheap!=null) sortby = 'price';
 		}
 	}
-	if (niagara) {
-		//queryObj.hasimg = true;
-	};
+	//Include only active posts
+	queryObj.acti=true;
 	//Execute the query
-	var myQuery = Post.find(queryObj,"_id title price tags date email hasimg content img.h");
+	var myQuery = Post.find(queryObj,"_id title price tags date email content hasimg hasthumb thumb.h img.h");
 	myQuery.sort(sortby).skip(PAGESIZE*(page-1))
 		.limit(PAGESIZE)
 		.exec(function(err,results){

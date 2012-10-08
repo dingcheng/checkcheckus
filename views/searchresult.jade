@@ -1,6 +1,9 @@
 extends layout
 
 block scripts
+	-if (items.niagara)
+		script(src="/javascripts/niagara.js")
+
 	script(src="/javascripts/searchpage.js")
 
 block stylesheet
@@ -10,47 +13,49 @@ block content
 	include sidebar
 	#container
 		.toolbar
-			#searchbar.tunebar
+			#searchbar
 				form#criteria(method='post')
 					input(type='submit',value='搜索')
-					input(type='text',name='searchbox',value='#{keywords}')
+					input(type='text',name='searchbox',value=keywords)
 					fieldset
 						legend 价格范围
-						input(type='text',name='minprice')
-						input(type='text',name='maxprice')
+						input(type='text',name='minprice',value=minprice)
+						input(type='text',name='maxprice',value=maxprice)
 					fieldset
 						legend 时效
-						select(name='during')
-							option(value='month') 一个月
-							option(value='week') 一周
-							option(value='today') 当天
-							option(value='season') 一季度
+						select#during(name='during')
+							-durations={month:'一个月',week:'一周',today:'当天',season:'一季度'}
+							-for(item in durations)
+								option(selected=item==during,value=item) #{durations[item]}
 					fieldset
 						legend 排序
-						input(type='submit',name='newest',value='最新鲜')
-						input(type='submit',name='pricy',value='最奢侈')
-						input(type='submit',name='cheap',value='最经济')
+						input(type='submit',name='newest',value='最新鲜',id='-date')
+						input(type='submit',name='pricy',value='最奢侈',id='-price')
+						input(type='submit',name='cheap',value='最经济',id='price')
 					input(type='hidden',name='sortby',value=sortby)
-					input(type='hidden',name='page',value=page)
-					input(type='hidden',name='pagecount',value=pagecount)
-			.tunebar
+			.paging
 				div
 					| #{total}条结果，第
 					span.page #{page}
 					| 页，当前显示：
-					span.range
-						| #{showingfrom} - #{showingto}
+					span.from #{showingfrom}
+					| - 
+					span.to #{showingto}
 				div
-					a.plump(href='javascript:;',id='prev') 前一页
-					|  [ 
+					a(href='javascript:;',class='topage prev',id=parseInt(page)-1) 前一页
+					| [ 
 					-for (var i = 1; i <= pagecount; i++)
 						a(href='javascript:;',class='topage',id=i) #{i}
 						|  
-					|  ] 
-					a.plump(href='javascript:;',id='next') 下一页
-		hr/
+					| ] 
+					a(href='javascript:;',class='topage next',id=parseInt(page)+1) 下一页
+		-if (!items.niagara)
+			#searchresults
+				include nextpage
+	-if(items.niagara)
 		#searchresults
-			include nextpage
+			include flowview
+			
 	.prompt
 		| 点击查看详情
 

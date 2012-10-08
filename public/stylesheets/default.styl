@@ -4,8 +4,6 @@ body,html
 	text-align: center
 	background-color: #ddd
 	color: #555
-*
-	border-radius: 5px
 .plump
 	background-color: themecolor
 	color: black
@@ -15,7 +13,7 @@ body,html
 		text-decoration: none
 		&:visited
 			color: black
-input,textarea,span.likeinput,select,img.ip
+input,button,textarea,span.likeinput,select,img.ip
 	font-size: 120%
 	color: black
 	background-color: white
@@ -61,6 +59,7 @@ legend
 	background-color: #eee
 	box-shadow: 0 0 2px black
 #sidebar
+	z-index: 999
 	width: 99%
 	background-color: themecolor
 	position: fixed
@@ -75,3 +74,6 @@ legend
 	@extend input
 	display: none
 	position: fixed
+	z-index: 9999
+.hidden
+	display: none

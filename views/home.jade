@@ -5,10 +5,16 @@ block scripts
 		$(document).ready(function(){
 			$('a').click(function(event){
 				event.preventDefault();
-				$('#searchbox').val($(this).attr('class'));
+				$('#searchinput').val($(this).attr('class'));
 				$('form').submit();
-				})
+				});
+			$('#newpost').click(function(e){
+				e.preventDefault();
+				var url = "newpost";
+				$(location).attr('href',url);
 			});
+			$('#searchinput').focus();
+		})
 
 block content
 	#container
@@ -19,10 +25,10 @@ block content
 		.centerbox
 			form(method='post')
 				div
-					input#searchbox(type='text',name='searchbox')
+					input#searchbox(type='text',name='searchbox',id='searchinput')
 					input(type='submit',name='search',value='搜索')
 				div
-					input(type='submit',name='post',value='发布信息')
+					input(type='submit',name='post',value='发布信息',id='newpost')
 		.centerbox
 			.linebox
 				span

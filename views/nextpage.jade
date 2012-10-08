@@ -11,5 +11,9 @@
 			-for(var j=0;j<item.tags.length;j++)
 				a.tag(href='/tag/#{item.tags[j]}') ##{item.tags[j]}
 		.postcontent.hidden
-input(type='hidden',name='from',value=showingfrom)
-input(type='hidden',name='to',value=showingto)
+.meta.hidden
+	.mtotal #{total}
+	.mpage #{page}
+	.mpagecount #{pagecount}
+	.mfrom #{showingfrom}
+	.mto #{showingto}

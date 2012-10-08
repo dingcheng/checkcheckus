@@ -19,31 +19,29 @@ block content
 					div
 						label 标题
 							em.star *
-						input(type='text',name='title')
+						input(type='text',name='title',id='title')
 					div
 						label 标签(Tags)
 							em.star *
 						input.short(type='text',name='tags',id='tags')
 					div
 						label 价格
-						input(type='text',name='price')
+						input(type='text',name='price',id='price')
 					div
 						label Email
 							em.star *
-						input(type='text',name='email')
+						input(type='text',name='email',id='email')
 					div
 						label 手机
-						input(type='text',name='cellnum')
+						input(type='text',name='cellnum',id='cellnum')
 					div
 						label Zip Code
 							em.star *
-						input(type='text',name='zipcode')
+						input(type='text',name='zipcode',id='zipcode')
 					div
 						label 地址
-						input(type='text',name='address')
+						input(type='text',name='address',id='address')
 				.tagBox
-					| 添加符合的常用标签能让大家更容易发现你的帖子
-					hr
 					a.tag(href='javascript:void(0)') #交易,买卖
 					a.tag(href='javascript:void(0)') #汽车,车
 					a.tag(href='javascript:void(0)') #家具
@@ -70,12 +68,35 @@ block content
 					a.tag(href='javascript:void(0)') #新生
 					a.tag(href='javascript:void(0)') #演出
 					a.tag(href='javascript:void(0)') #演唱会
+					hr
+					| 添加符合的常用标签能让大家更容易发现你的帖子
 			fieldset
 				legend 内容
-				textarea(rows='10',cols='50',name='content')
-				label 图片
-				input(type='file',name='img',id='upImg',accept='image/*')
-			//fieldset
+				textarea(rows='10',cols='50',name='content',id='content')
+				#imgctl
+					label 图片
+					input(type='file',name='img',id='upImg',accept='image/*',multiple="")
+					a.tagBox#resetimg(href='javascript:;') 重置图片
+					input.imeta(type='hidden',name='thumb',id='ithumb')
+					input.imeta(type='hidden',name='theight',id='itheight')
+					input.imeta(type='hidden',name='imdata',id='idata')
+					input.imeta(type='hidden',name='ctype',id='ictype')
+					input.imeta(type='hidden',name='imgheight',id='iheight')
+				canvas#imgpre(height=0,width=530)
 			input(type='submit',name='post',value='提交')
 	.prompt
 		| 敲回车,Tab,逗号来分隔标签
+	-if (editing){
+		.meta.hidden
+			#mediting #{editing}
+			#mtitle #{item.title}
+			#mtags #{item.tags}
+			#mprice #{item.price}
+			#memail #{item.email}
+			#mcellnum #{item.cellnum}
+			#mzipcode #{item.zip}
+			#maddress #{item.address}
+			#mcontent #{item.content}
+			-if (item.hasimg)
+				#mimg /getimg/#{item._id}
+		-}

@@ -1,0 +1,56 @@
+extends layout
+
+block scripts
+	script(src="/javascripts/searchpage.js")
+
+block stylesheet
+	link(rel='stylesheet', href='/stylesheets/searchresult.css')
+
+block content
+	include sidebar
+	#container
+		.toolbar
+			#searchbar.tunebar
+				form#criteria(method='post')
+					input(type='submit',value='搜索')
+					input(type='text',name='searchbox',value='#{keywords}')
+					fieldset
+						legend 价格范围
+						input(type='text',name='minprice')
+						input(type='text',name='maxprice')
+					fieldset
+						legend 时效
+						select(name='during')
+							option(value='month') 一个月
+							option(value='week') 一周
+							option(value='today') 当天
+							option(value='season') 一季度
+					fieldset
+						legend 排序
+						input(type='submit',name='newest',value='最新鲜')
+						input(type='submit',name='pricy',value='最奢侈')
+						input(type='submit',name='cheap',value='最经济')
+					input(type='hidden',name='sortby',value=sortby)
+					input(type='hidden',name='page',value=page)
+					input(type='hidden',name='pagecount',value=pagecount)
+			.tunebar
+				div
+					| #{total}条结果，第
+					span.page #{page}
+					| 页，当前显示：
+					span.range
+						| #{showingfrom} - #{showingto}
+				div
+					a.plump(href='javascript:;',id='prev') 前一页
+					|  [ 
+					-for (var i = 1; i <= pagecount; i++)
+						a(href='javascript:;',class='topage',id=i) #{i}
+						|  
+					|  ] 
+					a.plump(href='javascript:;',id='next') 下一页
+		hr/
+		#searchresults
+			include nextpage
+	.prompt
+		| 点击查看详情
+

@@ -7,7 +7,9 @@ require('./db.js');
 
 var express = require('express')
   , routes = require('./routes')
-  , buflist = require('./routes/buflist')
+  , stpage = require('./routes/static_pages')
+  , p_get = require('./routes/post_get')
+  , p_post = require('./routes/post_post')
   , http = require('http')
   , path = require('path');
 
@@ -33,16 +35,23 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', buflist.home);
-app.get('/tag/:tag', buflist.search_postreq);
-app.get('/newpost', buflist.newpost);
-app.get('/post/:id', buflist.viewpost);
-app.get('/valizip', buflist.valizip);
-app.get('/getimg/:id', buflist.getimg);
-app.post('/', buflist.search_postreq);
-app.post('/getcontent',buflist.ajax_postreq);
-app.post('/tag/:tag', buflist.search_postreq);
-app.post('/newpost',buflist.newpost_postreq);
+app.get('/', stpage.home);
+app.get('/newpost', stpage.newpost);
+
+app.get('/post/:id', p_get.viewpost);
+app.get('/valizip', p_get.valizip);
+app.get('/getimg/:id', p_get.getimg);
+app.get('/getthumb/:id', p_get.getthumb);
+app.get('/tag/:tag', p_post.search_postreq);
+app.get('/activate/:id/:code', p_get.activate);
+app.get('/preview/:id', p_get.viewpost);
+app.get('/edit/:id/:code', p_get.editpost);
+
+app.post('/edit/:id/:code', p_post.editpost);
+app.post('/', p_post.search_postreq);
+app.post('/getcontent',p_post.ajax_postreq);
+app.post('/tag/:tag', p_post.search_postreq);
+app.post('/newpost',p_post.newpost_postreq);
 
 app.use(function(req, res, next){
   res.render('err.jade', {title: "404 - Page Not Found",

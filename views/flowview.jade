@@ -1,0 +1,37 @@
+-for(var i=0;i<items.length;i++)
+	- var item = items[i]
+	- var date = item.date
+	.item.pin(id=item._id)
+		h3
+			a(href='/post/#{item._id}')
+				| #{date.getMonth()+1+"/"+date.getDate()+"/"+date.getFullYear()} 
+				-if(item.price)
+					| - $#{item.price} 
+				| - #{item.title}
+		.postcontent
+			-if (item.hasimg)
+				.imcontainer
+					a(href='/post/#{item._id}')
+						-if (item.hasthumb)
+							img(src='/getthumb/#{item._id}', width='265px', height=item.thumb.h)
+						-else
+							img(src='/getimg/#{item._id}', width='265px', height=item.img.h)
+			-else
+				div(style='max-height:400px')
+					| #{item.content}
+		div
+			span
+				-var mailargs = 'subject=RE:'+encodeURIComponent(item.title)+'&body=http://www.checkcheck.us/post/'+item._id
+				a(href='mailto:#{item.email}?'+mailargs) #{item.email}
+			-if (item.cellnum)
+				span , #{item.cellnum}
+		span
+			-for(var j=0;j<item.tags.length;j++)
+				a.tag(href='/tag/#{item.tags[j]}') ##{item.tags[j]}
+.meta.hidden
+	.mtotal #{total}
+	.mpage #{page}
+	.mpagecount #{pagecount}
+	.mfrom #{showingfrom}
+	.mto #{showingto}
+	.msortby ##{sortby}
