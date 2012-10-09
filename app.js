@@ -2,6 +2,10 @@
 /**
  * Module dependencies.
  */
+
+// Load configurations
+config = require('./siteconf.json');
+
 // Setting up db
 require('./db.js');
 
@@ -16,7 +20,7 @@ var express = require('express')
 var app = express();
 
 app.configure(function(){
-  app.set('port', process.env.PORT || 80);
+  app.set('port', process.env.PORT || config.port);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());

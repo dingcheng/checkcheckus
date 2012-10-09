@@ -1,0 +1,17 @@
+{
+	"sitename":"Checkcheck",
+	"domain":"http://www.checkcheck.us",
+	"port":80,
+	"mailer":{
+		"service":"Gmail",
+		"auth":{
+			"user": "admin@checkcheck.us",
+			"pass": "D1n0d3j5"
+			}
+	},
+	"db":{
+		"constr":"mongodb://localhost/buflist",
+		"user":"",
+		"pass":""
+	}
+}

@@ -1,6 +1,6 @@
 //Home page
 exports.home=function(req,res){
-	res.render('home', {title: '主页'});
+	res.render('home', {title: '主页', sitename:config.sitename});
 };
 
 exports.newpost=function(req,res){

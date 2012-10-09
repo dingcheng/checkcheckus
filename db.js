@@ -8,4 +8,4 @@ require('./models/post.js');
 // register User schema
 require('./models/user.js');
  
-mongoose.connect( 'mongodb://localhost/buflist' );
+mongoose.connect( config.db.constr );

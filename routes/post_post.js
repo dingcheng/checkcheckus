@@ -5,13 +5,7 @@ var mongoose = require('mongoose'),
 	ObjectId = mongoose.Types.ObjectId,
 	nmlr = require('nodemailer'),
 	jsha = require('jshashes');
-var smtpTransport=nmlr.createTransport('SMTP',{
-	service:'Gmail',
-	auth:{
-		user: 'admin@checkcheck.us',
-		pass: 'D1n0d3j5'
-	}
-});
+var smtpTransport=nmlr.createTransport('SMTP',config.mailer);
 var Segment = require('node-segment').Segment;
 var segment = new Segment();
 var PAGESIZE = 20;
@@ -75,11 +69,11 @@ exports.newpost_postreq=function(req,res){
 				);
 		else
 		{
-			var actlink = "http://localhost/activate/"+result._id+"/"+encodeURIComponent(postObj.actcode);
+			var actlink = config.domain+"/activate/"+result._id+"/"+encodeURIComponent(postObj.actcode);
 			var mailOptions = {
 				from: "✔Notification <admin@checkcheck.us>", // sender address
 				to: post.email, // list of receivers
-				subject: "✔checkcheck.us 新帖激活邮件", // Subject line
+				subject: "✔" + config.sitename + " 新帖激活邮件", // Subject line
 				html: "<h1>点击链接激活您的新帖：</h1><a href='"+actlink+"'>"+actlink+"</a>"
 			};
 			smtpTransport.sendMail(mailOptions,
