@@ -5,6 +5,7 @@
 
 // Load configurations
 config = require('./siteconf.json');
+//config = require('./localconf.json');
 
 // Setting up db
 require('./db.js');

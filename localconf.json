@@ -1,6 +1,6 @@
 {
 	"sitename":"Checkcheck",
-	"domain":"http://www.checkcheck.us",
+	"domain":"http://localhost",
 	"port":80,
 	"mailer":{
 		"service":"Gmail",
