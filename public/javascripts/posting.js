@@ -166,3 +166,13 @@ $(document).ready(function(){
 		$('#upImg').val('');
 	})
 });
+
+$(window).on('beforeunload',function(){
+	var dirty = false;
+	$('input:not(:submit)').each(function(){
+		dirty = dirty||$.trim($(this).val())!="";
+	});
+	if (dirty)
+		return '您有未提交的数据。';
+	return;
+});

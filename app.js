@@ -16,7 +16,8 @@ var express = require('express')
   , p_get = require('./routes/post_get')
   , p_post = require('./routes/post_post')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , gzippo = require('gzippo');
 
 var app = express();
 
@@ -33,7 +34,8 @@ app.configure(function(){
   app.use(app.router);
   app.use(function(req,res,next){console.log(req.ip,Date());next();});
   app.use(require('stylus').middleware(__dirname + '/public'));
-  app.use(express.static(path.join(__dirname, 'public')));
+  //app.use(express.static(path.join(__dirname, 'public')));
+  app.use(gzippo.staticGzip(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
