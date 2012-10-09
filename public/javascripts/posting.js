@@ -14,14 +14,14 @@ function gencvs(){
 	$('#iheight').val(cvs.height/2);
 	if (prev_h>0) ctx.putImageData(imgDat,0,0);
 	ctx.drawImage(this,0,prev_h,530,h);
-	$('#idata').val(cvs.toDataURL($('#ictype').val(),0.7));
+	$('#idata').val(cvs.toDataURL('image/jpg',0.7));
 	if (fstim){
 		this.width/=2;
 		this.height/=2;
 		thumbcvs.height = h/2;
 		thumbcvs.getContext('2d').drawImage(this,0,0,265,h/2);
 		$('#itheight').val(h/2);
-		$('#ithumb').val(thumbcvs.toDataURL($('#ictype').val()));
+		$('#ithumb').val(thumbcvs.toDataURL('image/jpg'));
 		fstim=false;
 	}
 }
