@@ -93,6 +93,21 @@ a:visited {
   background-color: #eee;
   box-shadow: 0 0 2px #000;
 }
+.navbar {
+  z-index: 999;
+  width: 100%;
+  background-color: #6cf;
+  top: 5px;
+  position: fixed;
+  text-align: left;
+  text-shadow: 2px 2px 5px #808080;
+  font-size: 120%;
+  box-shadow: 2px 2px 5px #808080;
+}
+.navbar span {
+  margin: 5px;
+  padding: 3px;
+}
 .prompt {
   display: none;
   position: fixed;
