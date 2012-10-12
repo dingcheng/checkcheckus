@@ -11,8 +11,8 @@ block stylesheet
 	link(rel='stylesheet', href='/stylesheets/postview.css')
 
 block content
-	include sidebar
-	#container
+	include navbar
+	.container
 		-if (!item.acti)
 			h1
 				| 该贴未被激活，不会被搜索功能包含，请用我们发送至您邮箱的链接激活该贴。
@@ -53,4 +53,4 @@ block content
 						| #{item.content}
 					-if(item.hasimg)
 						div
-							img.ip(src='/getimg/#{item._id}',width='50%')
+							img.ip(src='/img/#{item._id}',width='50%')

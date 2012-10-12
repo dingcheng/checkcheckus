@@ -13,9 +13,9 @@
 				.imcontainer
 					a(href='/post/#{item._id}')
 						-if (item.hasthumb)
-							img(src='/getthumb/#{item._id}', width='265px', height=item.thumb.h)
+							img(src='/thumb/#{item._id}', width='265px', height=item.thumb.h)
 						-else
-							img(src='/getimg/#{item._id}', width='265px', height=item.img.h)
+							img(src='/img/#{item._id}', width='265px', height=item.img.h)
 			-else
 				div(style='max-height:400px')
 					| #{item.content}

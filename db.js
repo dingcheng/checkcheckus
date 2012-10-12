@@ -8,4 +8,4 @@ require('./models/post.js');
 // register User schema
 require('./models/user.js');
  
-mongoose.connect( config.db.constr );
+mongoose.connect( myscope.config.db.constr );

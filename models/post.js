@@ -2,9 +2,7 @@ var mongoose = require( 'mongoose' );
 var Schema   = mongoose.Schema;
 var Zipcode = mongoose.model('Zipcode');
 var stopwords = require('./stopwords.json');
-var Segment = require('node-segment').Segment;
-var segment = new Segment();
-segment.useDefault();
+var segment = myscope.segment;
 
 
 function extractKeywords(text){

@@ -39,7 +39,7 @@ function go2page(event){
 		.forEach(function(a){formjson[a.name]=a.value;});
 	formjson.page=topage;
 	formjson.partial='true';
-	$.post('/',formjson,function(data){
+	$.get('/search',formjson,function(data){
 		$('#searchresults').html(data);
 		$('.page').html(topage);
 		$('.from').html($('.mfrom').text());

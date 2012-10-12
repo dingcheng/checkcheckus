@@ -22,12 +22,12 @@ block content
 			span.plump
 				| [#{sitename}]
 		.centerbox
-			form(method='post')
+			form(method='get',action='/search')
 				div
-					input#searchbox(type='text',name='searchbox',id='searchinput')
-					input(type='submit',name='search',value='搜索')
+					input#searchbox(type='text',name='query',id='searchinput')
+					button 搜索
 				div
-					input(type='submit',name='post',value='发布信息',id='newpost')
+					button#newpost 发布信息
 		.centerbox
 			.linebox
 				span

@@ -1,5 +1,6 @@
 themecolor = #66ccff
 body,html
+	margin: 0
 	font-family: "Lucida Grande", Helvetica, Arial, sans-serif
 	text-align: center
 	background-color: #ddd
@@ -50,7 +51,7 @@ a
 	color: #222	
 legend
 	@extend .plump
-#container
+.container
 	max-width: 940px
 	min-width: 500px
 	margin: auto
@@ -58,15 +59,16 @@ legend
 	padding: 10px 10px
 	background-color: #eee
 	box-shadow: 0 0 2px black
-#sidebar
+.navbar
 	z-index: 999
-	width: 99%
+	width: 100%
 	background-color: themecolor
-	position: fixed
 	top: 5px
+	position: fixed
 	text-align: left
 	text-shadow: 2px 2px 5px gray
 	font-size: 120%
+	box-shadow: 2px 2px 5px gray
 	span
 		margin: 5px
 		padding: 3px

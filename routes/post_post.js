@@ -4,12 +4,11 @@ var mongoose = require('mongoose'),
 	Zipcode = mongoose.model('Zipcode'),
 	ObjectId = mongoose.Types.ObjectId,
 	nmlr = require('nodemailer'),
-	jsha = require('jshashes');
+	jsha = require('jshashes'),
+	config = myscope.config;
 var smtpTransport=nmlr.createTransport('SMTP',config.mailer);
-var Segment = require('node-segment').Segment;
-var segment = new Segment();
 var PAGESIZE = 20;
-segment.useDefault();
+var segment = myscope.segment;
 
 //Ajax POST request handler, renders partial html to put into page
 exports.ajax_postreq=function(req,res){
@@ -21,10 +20,6 @@ exports.ajax_postreq=function(req,res){
 
 //Posting new post
 exports.newpost_postreq=function(req,res){
-	if (req.body.submit=='取消') {
-		res.redirect('/');
-		return;
-	};
 	var post = req.body;
 	var postObj = {
 		title: post.title,
@@ -94,10 +89,6 @@ exports.newpost_postreq=function(req,res){
 
 //Searching handler
 exports.search_postreq=function(req,res){
-	if('post' in req.body){
-		res.redirect('/newpost');
-		return;
-	}
 	var queryObj,title,tag,keywords,total;
 	var sortby = '-date';
 	var page = req.body.page==null?1:req.body.page;
@@ -105,12 +96,10 @@ exports.search_postreq=function(req,res){
 	//construct query from GET request
 	//this is tag searching, no segmenting performed
 	if (req.method=='GET') {
-		if (req.params.tag.length==0) {
-			title = '全部帖子';
-			queryObj = {};
-			keywords = '';
-		}
-		else{
+		title = '全部帖子';
+		queryObj = {};
+		keywords = '';
+		if (req.params.tag&&req.params.tag.length!=0){
 			title = req.params.tag;
 			tag = title.toLowerCase();
 			keywords = tag;

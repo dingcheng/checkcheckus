@@ -1,7 +1,7 @@
 extends layout
 
 block scripts
-	script(src='http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js')
+	script(src='/javascripts/jquery.validate.min.js')
 	script(src='/javascripts/bootstrap-tagmanager2.js')
 	script(src='/javascripts/posting.js')
 
@@ -10,8 +10,8 @@ block stylesheet
 	//link(rel='stylesheet', href='/stylesheets/bootstrap-tagmanager.css')
 
 block content
-	include sidebar
-	#container
+	include navbar
+	.container
 		form.newpost(method='post',id='postform',enctype='multipart/form-data')
 			fieldset
 				legend 基本信息
@@ -77,6 +77,7 @@ block content
 					label 图片
 					input(type='file',name='img',id='upImg',accept='image/*',multiple="")
 					a.tagBox#resetimg(href='javascript:;') 重置图片
+					a.tagBox#post(href='javascript:;') 提交
 					input.tmeta(type='hidden',name='thumb',id='ithumb')
 					input.tmeta(type='hidden',name='theight',id='itheight')
 					input.imeta(type='hidden',name='imdata',id='idata')

@@ -4,7 +4,12 @@
  */
 
 // Load configurations
-config = require('./siteconf.json');
+myscope = {};
+myscope.config = require('./siteconf.json');
+myscope.Segment = require('node-segment').Segment;
+myscope.segment = new myscope.Segment();
+myscope.segment.useDefault();
+var config = myscope.config;
 //config = require('./localconf.json');
 
 // Setting up db
@@ -34,8 +39,8 @@ app.configure(function(){
   app.use(app.router);
   app.use(function(req,res,next){console.log(req.ip,Date());next();});
   app.use(require('stylus').middleware(__dirname + '/public'));
-  //app.use(express.static(path.join(__dirname, 'public')));
-  app.use(gzippo.staticGzip(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(__dirname, 'public')));
+  //app.use(gzippo.staticGzip(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
@@ -47,17 +52,19 @@ app.get('/newpost', stpage.newpost);
 
 app.get('/post/:id', p_get.viewpost);
 app.get('/valizip', p_get.valizip);
-app.get('/getimg/:id', p_get.getimg);
-app.get('/getthumb/:id', p_get.getthumb);
-app.get('/tag/:tag', p_post.search_postreq);
+app.get('/img/:id', p_get.getimg);
+app.get('/thumb/:id', p_get.getthumb);
+//app.get('/tag/:tag', p_post.search_postreq);
+app.get('/tag/:query', p_get.search);
+app.get('/explore', p_post.search_postreq);
 app.get('/activate/:id/:code', p_get.activate);
 app.get('/preview/:id', p_get.viewpost);
 app.get('/edit/:id/:code', p_get.editpost);
+app.get('/search',p_get.search);
 
 app.post('/edit/:id/:code', p_post.editpost);
 app.post('/', p_post.search_postreq);
 app.post('/getcontent',p_post.ajax_postreq);
-app.post('/tag/:tag', p_post.search_postreq);
 app.post('/newpost',p_post.newpost_postreq);
 
 app.use(function(req, res, next){

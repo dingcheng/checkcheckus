@@ -3,6 +3,7 @@ var cvs
 	,imht=0
 	,fstim=true
 	,imgerr='<label class="error imgerr">请上传3MB以内的图片</label>';
+var warning='您有未提交的数据。';
 function gencvs(){
 	var h = this.height*530/this.width;
 	var prev_h = cvs.height;
@@ -105,7 +106,8 @@ $(document).ready(function(){
 		},
 		submitHandler: function(form) {
 			if(!$.browser.msie)
-                $('#upImg').remove(); 
+                $('#upImg').remove();
+            warning=null;
 			form.submit();
 		}
 	});
@@ -164,15 +166,18 @@ $(document).ready(function(){
 		$('.imeta').val('');
 		$('.tmeta').val('');
 		$('#upImg').val('');
+	});
+	$('#post').click(function(e){
+		e.preventDefault();
+		$('#postform').submit();
 	})
 });
 
 $(window).on('beforeunload',function(){
 	var dirty = false;
-	$('input:not(:submit)').each(function(){
+	$('input:not(:submit),textarea').each(function(){
 		dirty = dirty||$.trim($(this).val())!="";
 	});
 	if (dirty)
-		return '您有未提交的数据。';
-	return;
+		return warning;
 });

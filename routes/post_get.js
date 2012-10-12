@@ -2,7 +2,9 @@ var mongoose = require('mongoose'),
 	Post = mongoose.model('Post'),
 	User = mongoose.model('User'),
 	Zipcode = mongoose.model('Zipcode'),
-	ObjectId = mongoose.Types.ObjectId;
+	ObjectId = mongoose.Types.ObjectId,
+	segment = myscope.segment,
+	PAGESIZE = 20;
 
 
 //Return image to 'get' request based on post Id
@@ -100,4 +102,98 @@ exports.editpost=function(req,res){
 			else
 				res.redirect('/notfound');
 	});
+}
+
+exports.search=function(req,res){
+	var queryObj={},
+		tag,total,
+		q = req.query,
+		qstr = req.param('query'),
+		title = qstr,
+		sortby = '-date';
+	// Parse which page user is requesting, default to 1
+	var page = parseInt(q.page)>0?parseInt(q.page):1;
+	// Parse sorting method if exists
+	if (q.sortbtn) sortby = q.sortbtn;
+	else if (q.partial) sortby = q.sortby;
+	if (req.path.match(/\/tag/)) {
+		tag = qstr.toLowerCase();
+		queryObj = {$or:[
+			{tags:tag},
+			{ckeys:tag},
+			{tkeys:tag}]
+		};
+	}
+	else if (req.path.match(/\/search/)) {
+		if (qstr.length==0) {
+			title = '全部帖子';
+			queryObj = {};
+		}
+		else{
+			//Process query string
+			var segObj = segment.doSegment(qstr).filter(function(v){
+				return v.p!=2048;
+			});
+			var segArr = [];
+			segObj.forEach(function(v){segArr.push(v.w.toLowerCase());})
+			title = segArr.join(' ');
+			queryObj = {$or:[
+				{tags:{$in:segArr}},
+				{tkeys:{$in:segArr}},
+				{ckeys:{$in:segArr}}]
+			};
+		}
+		//Set timing argument
+		if (q.during) {
+			var startDate = new Date();
+			switch(q.during){
+				case 'today': startDate.setDate(startDate.getDate()-1);break;
+				case 'month': startDate.setDate(startDate.getDate()-31);break;
+				case 'week': startDate.setDate(startDate.getDate()-8);break;
+				case 'season': startDate.setDate(startDate.getDate()-91);break;
+				default: startDate=null;
+			}
+			if (startDate!=null){
+				queryObj.date={};
+				queryObj.date.$gte=startDate;
+			}
+		}
+		//Set price range
+		var minp = parseInt(q.minprice);
+		var maxp = parseInt(q.maxprice);
+		if (minp>=0){
+			queryObj.price={};
+			queryObj.price.$gte=minp;
+		}else minp='';
+		if (maxp>0){
+			if (queryObj.price==null) {queryObj.price={};}
+			queryObj.price.$lt=maxp;
+		}else maxp='';
+	}
+	//Include only active posts
+	queryObj.acti=true;
+	//Execute the query
+	var myQuery = Post.find(queryObj,"_id title price tags date email content hasimg hasthumb thumb.h img.h");
+	myQuery.sort(sortby).skip(PAGESIZE*(page-1))
+		.limit(PAGESIZE)
+		.exec(function(err,results){
+			myQuery.count(function(err,count){
+				results.niagara=true;
+				var pagename = q.partial==null?'searchresult':'flowview';
+				res.render(pagename,{
+					title:title,
+					items:results,
+					total:count,
+					showingfrom:(page-1)*PAGESIZE+1,
+					showingto:(page-1)*PAGESIZE+results.length,
+					pagecount:Math.ceil(count/PAGESIZE),
+					page:page,
+					keywords:qstr,
+					sortby:sortby,
+					during:q.during,
+					minprice:minp,
+					maxprice:maxp
+				});
+			})
+		});
 }

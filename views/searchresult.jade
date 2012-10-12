@@ -10,13 +10,13 @@ block stylesheet
 	link(rel='stylesheet', href='/stylesheets/searchresult.css')
 
 block content
-	include sidebar
-	#container
+	include navbar
+	.container
 		.toolbar
 			#searchbar
-				form#criteria(method='post')
-					input(type='submit',value='搜索')
-					input(type='text',name='searchbox',value=keywords)
+				form#criteria(method='get',action='/search')
+					button 搜索
+					input(type='text',name='query',value=keywords)
 					fieldset
 						legend 价格范围
 						input(type='text',name='minprice',value=minprice)
@@ -29,9 +29,9 @@ block content
 								option(selected=item==during,value=item) #{durations[item]}
 					fieldset
 						legend 排序
-						input(type='submit',name='newest',value='最新鲜',id='-date')
-						input(type='submit',name='pricy',value='最奢侈',id='-price')
-						input(type='submit',name='cheap',value='最经济',id='price')
+						button(name='sortbtn',value='-date',id='-date') 最新鲜
+						button(name='sortbtn',value='-price',id='-price') 最奢侈
+						button(name='sortbtn',value='price',id='price') 最经济
 					input(type='hidden',name='sortby',value=sortby)
 			.paging
 				div
