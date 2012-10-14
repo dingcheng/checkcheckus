@@ -1,56 +1,40 @@
 extends layout
 
-block scripts
-	script
-		$(document).ready(function(){
-			$(':empty').hide();
-			});
-
-
-block stylesheet
-	link(rel='stylesheet', href='/stylesheets/postview.css')
-
 block content
-	include navbar
 	.container
+		include navbar
 		-if (!item.acti)
-			h1
-				| 该贴未被激活，不会被搜索功能包含，请用我们发送至您邮箱的链接激活该贴。
-		.tunebar
-			form.newpost
-				fieldset
-					legend 基本信息
-					div
-						label 标题：
-						span.sibox
-							| #{item.title}
-					div
-						label 价格：
-						span.sibox
-							| #{item.price}
-					div
-						label 标签：
-						span.sibox
-							-for (var i = 0; i < item.tags.length; i++)
-								a.tag(href='/tag/#{item.tags[i]}')
-									| ##{item.tags[i]}
-					div
-						label 发布日期：
-						span.sibox
-							| #{item.date.toDateString()}
-					div
-						label 发帖人邮箱：
-						span.sibox
-							-var mailargs = 'subject=RE:'+encodeURIComponent(item.title)+'&body=http://www.checkcheck.us/post/'+item._id
-							a(href='mailto:#{item.email}?'+mailargs) #{item.email}
-					div
-						label 发帖人手机号：
-						span.sibox
-							| #{item.cellnum}
-				fieldset
-					legend 内容
-					textarea(rows='10',cols='50',readonly='readonly')
+			.row
+				h1 该贴未被激活，不会被搜索功能包含，请用我们发送至您邮箱的链接激活该贴。
+		form.form-horizontal.well
+			fieldset
+				legend 基本信息
+				.control-group
+					label.control-label 标题：
+					input.input-xlarge(type='text',value=item.title,disabled='')
+				.control-group
+					label.control-label 价格：
+					input.input-large(type='text',value=item.price,disabled='')
+				.control-group
+					label.control-label 标签：
+					-for (var i = 0; i < item.tags.length; i++)
+						a.tag.btn.btn-info.btn-mini(href='/tag/#{item.tags[i]}')
+							| ##{item.tags[i]}
+				.control-group
+					label.control-label 发布日期：
+					input.input-large(type='text',value=item.date.toDateString(),disabled='')
+				.control-group
+					label.control-label 发帖人邮箱：
+					-var mailargs = 'subject=RE:'+encodeURIComponent(item.title)+'&body=http://www.checkcheck.us/post/'+item._id
+					a.btn(href='mailto:#{item.email}?'+mailargs) #{item.email}
+				.control-group
+					label.control-label 发帖人手机号：
+					input.input-large(type='text',value=item.cellnum,disabled='')
+			fieldset
+				legend 内容
+				.control-group
+					textarea.span10(rows='10',cols='50',readonly='readonly')
 						| #{item.content}
+				.control-group
 					-if(item.hasimg)
-						div
-							img.ip(src='/img/#{item._id}',width='50%')
+						img.ip(src='/img/#{item._id}',width='50%')

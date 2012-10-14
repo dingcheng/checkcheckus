@@ -1,33 +1,33 @@
--for(var i=0;i<items.length;i++)
-	- var item = items[i]
-	- var date = item.date
-	.item.pin(id=item._id)
-		h3
+#searchresults
+	-for(var i=0;i<items.length;i++)
+		- var item = items[i]
+		- var date = item.date
+		.pin.well.well-small(id=item._id)
 			a(href='/post/#{item._id}')
-				| #{date.getMonth()+1+"/"+date.getDate()+"/"+date.getFullYear()} 
-				-if(item.price)
-					| - $#{item.price} 
-				| - #{item.title}
-		.postcontent
-			-if (item.hasimg)
-				.imcontainer
+					| #{date.getMonth()+1+"/"+date.getDate()+"/"+date.getFullYear()} 
+					-if(item.price)
+						| - $#{item.price} 
+					| - #{item.title}
+			div
+				-if (item.hasimg)
 					a(href='/post/#{item._id}')
 						-if (item.hasthumb)
-							img(src='/thumb/#{item._id}', width='265px', height=item.thumb.h)
+							img(src='/thumb/#{item._id}', height=item.thumb.h+'px')
 						-else
-							img(src='/img/#{item._id}', width='265px', height=item.img.h)
-			-else
-				div(style='max-height:400px')
-					| #{item.content}
-		div
+							img(src='/img/#{item._id}', height=item.img.h+'px')
+				-else
+					div(style='max-height:400px;overflow:scroll;')
+							| #{item.content}
 			span
 				-var mailargs = 'subject=RE:'+encodeURIComponent(item.title)+'&body=http://www.checkcheck.us/post/'+item._id
-				a(href='mailto:#{item.email}?'+mailargs) #{item.email}
-			-if (item.cellnum)
-				span , #{item.cellnum}
-		span
-			-for(var j=0;j<item.tags.length;j++)
-				a.tag(href='/tag/#{item.tags[j]}') ##{item.tags[j]}
+				a.btn.btn-mini(href='mailto:#{item.email}?'+mailargs) #{item.email}
+				-if (item.cellnum)
+					span , #{item.cellnum}
+			span
+				-for(var j=0;j<item.tags.length;j++)
+					a.tag.btn.btn-mini.btn-info(href='/tag/#{item.tags[j]}') ##{item.tags[j]}
+.container
+	a.btn.btn-primary.btn-block.btn-large(href='javascript:$(window).scrollTop(0);') 回顶部
 .meta.hidden
 	.mtotal #{total}
 	.mpage #{page}

@@ -47,7 +47,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', stpage.home);
+app.get('/', p_get.search);
 app.get('/newpost', stpage.newpost);
 
 app.get('/post/:id', p_get.viewpost);

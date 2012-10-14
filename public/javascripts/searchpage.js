@@ -1,30 +1,4 @@
-function contentAjax(event){
-	//This function is used to load post content when a post div is clicked
-	var item = $(this);
-	var holder = $(this).children('.postcontent');
-	$('.prompt').hide();
 
-	if (holder.hasClass('open')) {
-		holder.slideUp('fast').removeClass('open');
-		return;
-	}
-	$('.open').removeClass('open').slideUp('fast');
-	if(item.hasClass('fetched')){
-		holder.slideToggle('fast').addClass('open');
-	}
-	else{
-		var id = item.attr('id');
-		$.post('/getcontent',{id:id},
-			function(data){
-				item.children('.postcontent')
-					.html(data)
-					.slideToggle('fast')
-					.addClass('open');
-				item.addClass('fetched');
-			}
-		);
-	}
-}
 var con,ite,iw,m;
 function go2page(event){
 	event.preventDefault();
@@ -40,13 +14,16 @@ function go2page(event){
 	formjson.page=topage;
 	formjson.partial='true';
 	$.get('/search',formjson,function(data){
-		$('#searchresults').html(data);
-		$('.page').html(topage);
-		$('.from').html($('.mfrom').text());
-		$('.to').html($('.mto').text());
+		$('.body').html(data);
 		$('.prev').attr('id',topage-1);
 		$('.next').attr('id',topage+1);
-		ite = $('.pin');
+		if (topage>1) $('.prev').removeClass('disabled');
+		else $('.prev').addClass('disabled');
+		if (topage<pagecount) $('.next').removeClass('disabled');
+		else $('.next').addClass('disabled');
+		$('.active').removeClass('active');
+		$('#'+topage).addClass('active');
+		ite = $('.pin');con = $('#searchresults');
 		reposition(con,ite,m,iw,true);
 	});
 }
@@ -68,5 +45,5 @@ $(document).ready(function(){
 	$(window).resize(cbrepos);
 	// Highlight selected sorting order
 	var sb = $('.msortby').text();
-	$(sb).addClass('plump').click(function(e){e.preventDefault();});
+	$(sb).addClass('btn-info').click(function(e){e.preventDefault();});
 });

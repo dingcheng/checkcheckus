@@ -3,39 +3,22 @@ extends layout
 block scripts
 	script
 		$(document).ready(function(){
-			$('a').click(function(event){
-				event.preventDefault();
-				$('#searchinput').val($(this).attr('class'));
-				$('form').submit();
-				});
 			$('#newpost').click(function(e){
 				e.preventDefault();
 				var url = "newpost";
 				$(location).attr('href',url);
 			});
-			$('#searchinput').focus();
+			$('.searchinput').focus();
 		})
 
 block content
-	#container
-		h2.title
-			span.plump
-				| [#{sitename}]
-		.centerbox
-			form(method='get',action='/search')
-				div
-					input#searchbox(type='text',name='query',id='searchinput')
-					button 搜索
-				div
-					button#newpost 发布信息
-		.centerbox
-			.linebox
-				span
-					a(href='javascript:;', class='汽车 车') 汽车
-				span
-					a(href='javascript:;', class='租房 房子 房') 租房
-			.linebox
-				span
-					a(href='javascript:;', class='交易 买卖 甩卖') 甩卖
-				span
-					a(href='javascript:;', class='交友 社交 活动') 交友
+	.container
+		include navbar
+		.well.span7
+			h1.title [#{sitename}]
+			form.form-search(method='get',action='/search')
+				input.searchbox.input-xlarge(type='text',name='query',id='searchinput')
+				button.btn 快速搜索
+				button.btn#newpost 发布信息
+		.span3.well
+			include cmtagbox

@@ -1,61 +1,26 @@
 extends layout
 
-block scripts
-	-if (items.niagara)
-		script(src="/javascripts/niagara.js")
-
-	script(src="/javascripts/searchpage.js")
-
-block stylesheet
-	link(rel='stylesheet', href='/stylesheets/searchresult.css')
+block inlinestyle
+	style
+		#searchresults{
+			margin: auto;
+			position: relative;
+		}
+		.pin{
+			position: absolute;
+			width: 300px;
+			text-align: center;
+		}
+		.meta{
+			display: none;
+		}
 
 block content
-	include navbar
 	.container
-		.toolbar
-			#searchbar
-				form#criteria(method='get',action='/search')
-					button 搜索
-					input(type='text',name='query',value=keywords)
-					fieldset
-						legend 价格范围
-						input(type='text',name='minprice',value=minprice)
-						input(type='text',name='maxprice',value=maxprice)
-					fieldset
-						legend 时效
-						select#during(name='during')
-							-durations={month:'一个月',week:'一周',today:'当天',season:'一季度'}
-							-for(item in durations)
-								option(selected=item==during,value=item) #{durations[item]}
-					fieldset
-						legend 排序
-						button(name='sortbtn',value='-date',id='-date') 最新鲜
-						button(name='sortbtn',value='-price',id='-price') 最奢侈
-						button(name='sortbtn',value='price',id='price') 最经济
-					input(type='hidden',name='sortby',value=sortby)
-			.paging
-				div
-					| #{total}条结果，第
-					span.page #{page}
-					| 页，当前显示：
-					span.from #{showingfrom}
-					| - 
-					span.to #{showingto}
-				div
-					a(href='javascript:;',class='topage prev',id=parseInt(page)-1) 前一页
-					| [ 
-					-for (var i = 1; i <= pagecount; i++)
-						a(href='javascript:;',class='topage',id=i) #{i}
-						|  
-					| ] 
-					a(href='javascript:;',class='topage next',id=parseInt(page)+1) 下一页
-		-if (!items.niagara)
-			#searchresults
-				include nextpage
-	-if(items.niagara)
-		#searchresults
-			include flowview
-			
-	.prompt
-		| 点击查看详情
-
+		include navbar
+		include inlinesearch
+		include pager
+	.body
+		include flowview
+	script(src="/javascripts/niagara.js")		
+	script(src="/javascripts/searchpage.js")

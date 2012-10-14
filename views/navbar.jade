@@ -1,5 +1,10 @@
-.navbar
-	span.plump
-		a(href='/') 主页
-	span.plump
-		a(href='/newpost') 新帖
+.navbar.navbar-inverse
+	.navbar-inner
+		a.brand(href='/') [CHECK&#178;]
+		ul.nav
+			li
+				a(href='/') 主页
+			li
+				a(href='/newpost') 新帖
+		form.navbar-search.pull-right(method='get',action='/search')
+			input.search-query#searchinput(type='text', name='query', placeholder='搜索')

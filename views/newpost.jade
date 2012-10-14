@@ -5,87 +5,85 @@ block scripts
 	script(src='/javascripts/bootstrap-tagmanager2.js')
 	script(src='/javascripts/posting.js')
 
-block stylesheet
-	link(rel='stylesheet', href='/stylesheets/postview.css')
-	//link(rel='stylesheet', href='/stylesheets/bootstrap-tagmanager.css')
-
 block content
-	include navbar
 	.container
-		form.newpost(method='post',id='postform',enctype='multipart/form-data')
-			fieldset
+		include navbar
+		form.form-horizontal.well(method='post',id='postform',enctype='multipart/form-data')
+			fieldset.span7
 				legend 基本信息
-				.floatLeft
-					div
-						label 标题
-							em.star *
-						input(type='text',name='title',id='title')
-					div
-						label 标签(Tags)
-							em.star *
-						input.short(type='text',name='tags',id='tags')
-					div
-						label 价格
-						input(type='text',name='price',id='price')
-					div
-						label Email
-							em.star *
-						input(type='text',name='email',id='email')
-					div
-						label 手机
-						input(type='text',name='cellnum',id='cellnum')
-					div
-						label Zip Code
-							em.star *
-						input(type='text',name='zipcode',id='zipcode')
-					div
-						label 地址
-						input(type='text',name='address',id='address')
-				.tagBox
-					a.tag(href='javascript:void(0)') #交易,买卖
-					a.tag(href='javascript:void(0)') #汽车,车
-					a.tag(href='javascript:void(0)') #家具
-					a.tag(href='javascript:void(0)') #电子产品
-					a.tag(href='javascript:void(0)') #书,书籍
-					a.tag(href='javascript:void(0)') #教材
-					a.tag(href='javascript:void(0)') #玩具
-					a.tag(href='javascript:void(0)') #化妆品
-					hr
-					a.tag(href='javascript:void(0)') #租
-					a.tag(href='javascript:void(0)') #出租
-					a.tag(href='javascript:void(0)') #求租
-					a.tag(href='javascript:void(0)') #短租
-					a.tag(href='javascript:void(0)') #租房
-					hr
-					a.tag(href='javascript:void(0)') #出行
-					a.tag(href='javascript:void(0)') #拼车
-					a.tag(href='javascript:void(0)') #旅游
-					a.tag(href='javascript:void(0)') #度假
-					hr
-					a.tag(href='javascript:void(0)') #活动
-					a.tag(href='javascript:void(0)') #聚会
-					a.tag(href='javascript:void(0)') #联谊
-					a.tag(href='javascript:void(0)') #新生
-					a.tag(href='javascript:void(0)') #演出
-					a.tag(href='javascript:void(0)') #演唱会
-					hr
-					| 添加符合的常用标签能让大家更容易发现你的帖子
+				.control-group
+					label.control-label(for='title') 标题
+						em.star *
+					input.input-xlarge(type='text',name='title',id='title')
+				.control-group
+					label.control-label(for='tags') 标签(Tags)
+						em.star *
+					input.input-small(type='text',name='tags',id='tags')
+				.control-group
+					label.control-label(for='price') 价格
+					input(type='text',name='price',id='price')
+				.control-group
+					label.control-label(for='email') Email
+						em.star *
+					input(type='text',name='email',id='email')
+				.control-group
+					label.control-label(for='cellnum') 手机
+					input(type='text',name='cellnum',id='cellnum')
+				.control-group
+					label.control-label(for='zipcode') Zip Code
+						em.star *
+					input(type='text',name='zipcode',id='zipcode')
+				.control-group
+					label.control-label(for='address') 地址
+					input(type='text',name='address',id='address')
+			.span3.offset1
+				p.lead 添加常用标签，让大家更容易发现你的帖子
+				hr
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #交易,买卖
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #汽车,车
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #家具
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #电子产品
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #书,书籍
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #教材
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #玩具
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #化妆品
+				hr
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #租
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #出租
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #求租
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #短租
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #租房
+				hr
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #出行
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #拼车
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #旅游
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #度假
+				hr
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #活动
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #聚会
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #联谊
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #新生
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #演出
+				a.btn.btn-mini.btn-info.tag(href='javascript:void(0)') #演唱会
 			fieldset
 				legend 内容
-				textarea(rows='10',cols='50',name='content',id='content')
-				#imgctl
-					label 图片
+				.control-group
+					label.control-label  
+					textarea.span9(rows='10',cols='50',name='content',id='content')
+				.pull-right
+					a.btn#resetimg(href='javascript:;') 重置图片
+					a.btn#post(href='javascript:;') 提交
+				.control-group#imgctl
+					label.control-label 图片
 					input(type='file',name='img',id='upImg',accept='image/*',multiple="")
-					a.tagBox#resetimg(href='javascript:;') 重置图片
-					a.tagBox#post(href='javascript:;') 提交
 					input.tmeta(type='hidden',name='thumb',id='ithumb')
 					input.tmeta(type='hidden',name='theight',id='itheight')
 					input.imeta(type='hidden',name='imdata',id='idata')
 					input.imeta(type='hidden',name='ctype',id='ictype')
 					input.imeta(type='hidden',name='imgheight',id='iheight')
 				canvas#imgpre(height=0,width=530)
-			input(type='submit',name='post',value='提交')
-	.prompt
+			button.btn.btn-block 提交
+	.prompt.well(style='position:fixed;display:none;')
 		| 敲回车,Tab,逗号来分隔标签
 	-if (editing){
 		.meta.hidden

@@ -1,0 +1,21 @@
+.pagination.pagination-centered
+	ul
+		-if (page==1)
+			li.disabled.topage.prev(id=parseInt(page)-1)
+				a(href='javascript:;') 前一页
+		-else
+			li.topage.prev(id=parseInt(page)-1)
+				a(href='javascript:;') 前一页
+		-for (var i = 1; i <= pagecount; i++)
+			-if (page==i)
+				li.active.topage(id=i)
+					a(href='javascript:;') #{i}
+			-else
+				li.topage(id=i)
+					a(href='javascript:;') #{i}
+		-if (page==pagecount)
+			li.disabled.topage.next(id=parseInt(page)+1)
+				a(href='javascript:;') 下一页
+		-else
+			li.topage.next(id=parseInt(page)+1)
+				a(href='javascript:;') 下一页

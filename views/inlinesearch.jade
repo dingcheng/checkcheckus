@@ -1,0 +1,20 @@
+form.well.form-inline#criteria(method='get',action='/search')
+	.span3.input-prepend
+		button.btn.btn-primary 搜索
+		input.input-medium(type='text', name='query', placeholder='关键字')
+	.span3.input-prepend
+		span.add-on 价格
+		input.input-mini(type='text',name='minprice',value=minprice)
+		input.input-mini(type='text',name='maxprice',value=maxprice)
+	.span3.input-prepend
+		span.add-on 时效
+		select.span2#during(name='during')
+			-durations={month:'一个月',week:'一周',today:'当天',season:'一季度'}
+			-for(item in durations)
+				option(selected=item==during,value=item) #{durations[item]}
+	.btn-group
+		button.btn.btn-small.btn-disabled(disabled="") 排序
+		button.btn.btn-small(name='sortbtn',value='-date',id='-date') 新鲜
+		button.btn.btn-small(name='sortbtn',value='-price',id='-price') 奢侈
+		button.btn.btn-small(name='sortbtn',value='price',id='price') 经济
+	input(type='hidden',name='sortby',value=sortby)
