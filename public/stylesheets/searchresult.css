@@ -3,7 +3,6 @@ html {
   margin: 0;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   text-align: center;
-  background-color: #ddd;
   color: #555;
 }
 .plump,
@@ -157,7 +156,7 @@ fieldset {
   margin: 2px;
 }
 .pin {
-  background-color: #fff;
+  background-color: #f2f2f2;
   position: absolute;
   text-align: center;
   padding: 2px;
