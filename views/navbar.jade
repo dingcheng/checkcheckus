@@ -1,5 +1,10 @@
 .navbar
-	span.plump
-		a(href='/') 主页
-	span.plump
-		a(href='/newpost') 新帖
+	ul
+		li.plump
+			a(href='/') 主页
+		li.plump
+			a(href='/newpost') 新帖
+		li.pull-right
+			form(method='get',action='/search')
+				input(type='text',name='query')
+				button 搜索

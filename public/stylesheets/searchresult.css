@@ -34,7 +34,7 @@ img.ip,
   font-size: 120%;
   color: #000;
   background-color: #fff;
-  border: 1px solid #bdbdbd;
+  border: 1px solid #999;
   background-repeat: no-repeat;
   background-position: 8px 9px;
   display: inline;
@@ -78,7 +78,7 @@ a {
 }
 a:hover {
   color: #000 !important;
-  background-color: #fff;
+  background-color: #f63;
 }
 a:visited {
   color: #600;
@@ -93,25 +93,47 @@ a:visited {
   max-width: 940px;
   min-width: 500px;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 15px;
   padding: 10px 10px;
-  background-color: #eee;
-  box-shadow: 0 0 2px #000;
+  background-color: #fafafa;
+  border: 1px solid #808080;
 }
 .navbar {
   z-index: 999;
   width: 100%;
   background-color: #6cf;
-  top: 5px;
-  position: fixed;
-  text-align: left;
-  text-shadow: 2px 2px 5px #808080;
-  font-size: 120%;
-  box-shadow: 2px 2px 5px #808080;
+  position: relative;
+  top: 0;
+  padding: 6px;
+  min-width: 500px;
+  min-height: 32px;
+  text-align: center;
+  box-shadow: 1px 5px #ddd;
+  font-size: 110%;
 }
-.navbar span {
-  margin: 5px;
-  padding: 3px;
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.navbar li {
+  display: inline;
+  float: left;
+  margin-right: 0.5em;
+  height: 30px;
+}
+.navbar a {
+  display: block;
+  width: 60px;
+  padding: 0.2em 1em;
+}
+.navbar .pull-right {
+  float: right;
+}
+.navbar input,
+.navbar button {
+  margin: 0;
+  padding: 0;
 }
 .prompt {
   display: none;
@@ -120,6 +142,9 @@ a:visited {
 }
 .hidden {
   display: none;
+}
+::selection {
+  background-color: #ff0;
 }
 body {
   font-size: 100%;
@@ -156,17 +181,15 @@ fieldset {
   margin: 2px;
 }
 .pin {
-  background-color: #f2f2f2;
+  background-color: #fafafa;
   position: absolute;
   text-align: center;
   padding: 2px;
   width: 300px;
   font-size: 80%;
   border: 1px solid #808080;
-  box-shadow: 0 0 2px #808080;
 }
 .item:hover {
-  text-shadow: 1px 1px 2px #808080;
   box-shadow: 2px 2px 2px #808080;
 }
 .postcontent {

@@ -1,4 +1,5 @@
 themecolor = #66ccff
+shadowcolor = #eee
 body,html
 	margin: 0
 	font-family: "Lucida Grande", Helvetica, Arial, sans-serif
@@ -17,7 +18,7 @@ input,button,textarea,span.likeinput,select,img.ip
 	font-size: 120%
 	color: black
 	background-color: white
-	border: 1px solid #bdbdbd
+	border: 1px solid #999
 	background-repeat: no-repeat
 	background-position: 8px 9px
 	display: inline
@@ -40,7 +41,7 @@ a
 	color: black
 	&:hover
 		color: black !important
-		background-color: white
+		background-color: #ff6633
 	&:visited
 		color: #660000
 .tag
@@ -54,23 +55,40 @@ legend
 	max-width: 940px
 	min-width: 500px
 	margin: auto
-	margin-top: 30px
+	margin-top: 15px
 	padding: 10px 10px
-	background-color: #eee
-	box-shadow: 0 0 2px black
+	background-color: #fafafa
+	border: 1px solid gray
 .navbar
 	z-index: 999
 	width: 100%
 	background-color: themecolor
-	top: 5px
-	position: fixed
-	text-align: left
-	text-shadow: 2px 2px 5px gray
-	font-size: 120%
-	box-shadow: 2px 2px 5px gray
-	span
-		margin: 5px
-		padding: 3px
+	position: relative
+	top: 0
+	padding: 6px
+	min-width: 500px
+	min-height: 32px
+	text-align: center
+	box-shadow: 1px 5px #ddd
+	font-size: 110%
+	ul
+		list-style-type: none
+		margin: 0
+		padding: 0
+	li
+		display: inline
+		float: left
+		margin-right: 0.5em
+		height: 30px
+	a
+		display: block
+		width: 60px
+		padding: .2em 1em
+	.pull-right
+		float: right
+	input,button
+		margin: 0
+		padding: 0
 .prompt
 	@extend input
 	display: none
@@ -78,3 +96,5 @@ legend
 	z-index: 9999
 .hidden
 	display: none
+::selection
+	background-color: yellow

@@ -17,29 +17,29 @@ block content
 				legend 基本信息
 				.floatLeft
 					div
-						label 标题
+						label(for='title') 标题
 							em.star *
 						input(type='text',name='title',id='title')
 					div
-						label 标签(Tags)
+						label(for='tags') 标签(Tags)
 							em.star *
 						input.short(type='text',name='tags',id='tags')
 					div
-						label 价格
+						label(for='price') 价格
 						input(type='text',name='price',id='price')
 					div
-						label Email
+						label(for='email') Email
 							em.star *
 						input(type='text',name='email',id='email')
 					div
-						label 手机
+						label(for='cellnum') 手机
 						input(type='text',name='cellnum',id='cellnum')
 					div
-						label Zip Code
+						label(for='zipcode') Zip Code
 							em.star *
 						input(type='text',name='zipcode',id='zipcode')
 					div
-						label 地址
+						label(for='address') 地址
 						input(type='text',name='address',id='address')
 				.tagBox
 					a.tag(href='javascript:void(0)') #交易,买卖
@@ -74,7 +74,7 @@ block content
 				legend 内容
 				textarea(rows='10',cols='50',name='content',id='content')
 				#imgctl
-					label 图片
+					label(for='upImg') 图片
 					input(type='file',name='img',id='upImg',accept='image/*',multiple="")
 					a.tagBox#resetimg(href='javascript:;') 重置图片
 					a.tagBox#post(href='javascript:;') 提交

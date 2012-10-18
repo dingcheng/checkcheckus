@@ -1,9 +1,9 @@
 {
-  "name": "application-name",
-  "version": "0.0.1",
+  "name": "checkcheckus",
+  "version": "0.0.1-6",
   "private": true,
   "scripts": {
-    "start": "node app"
+    "start": "app.js"
   },
   "dependencies": {
     "express": "3.0.0rc4",
@@ -11,6 +11,12 @@
     "stylus": "*",
     "bcrypt": "0.7.2",
     "mongoose": "*",
-    "nodemailer": "0.3.28"
+    "nodemailer": "0.3.28",
+    "gzippo": "0.1.x",
+    "node-segment": "0.0.x"
+  },
+  "subdomain": "dcren.ccu",
+  "engines": {
+    "node": "0.8.x"
   }
 }
