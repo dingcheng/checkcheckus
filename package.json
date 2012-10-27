@@ -16,6 +16,7 @@
     "node-segment": "0.0.x",
     "passport": "*",
     "passport-local": "*",
+    "connect-flash": "*"
   },
   "subdomain": "dcren.ccu",
   "engines": {
