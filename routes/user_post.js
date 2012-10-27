@@ -62,7 +62,7 @@ exports.newuser_postreq=function(req,res){
 				actlink = makeactlink(result._id,result.actcode);
 				mailOptions.html = mailtemplate(actlink);
 				sendmail(mailOptions);
-				res.redirect('/user/'+result._id);
+				res.redirect('/user/');
 			}
 			else // If it's activated
 				renderErr('This email address is already registered with us,'+
@@ -78,7 +78,7 @@ exports.newuser_postreq=function(req,res){
 					renderErr('Cannot save to db.');
 				}
 				else
-					res.redirect('/login/'+result._id);
+					res.redirect('/login/');
 			});
 		}
 	});
