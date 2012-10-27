@@ -3,9 +3,9 @@ extends layout
 block scripts
 	script
 		$(document).ready(function(){
-			$('a').click(function(event){
+			$('a.taglink').click(function(event){
 				event.preventDefault();
-				$('#searchinput').val($(this).attr('class'));
+				$('#searchinput').val($(this).attr('for'));
 				$('form').submit();
 				});
 			$('#newpost').click(function(e){
@@ -17,6 +17,7 @@ block scripts
 		})
 
 block content
+	include navbar
 	.container
 		h2.title
 			span.plump
@@ -24,18 +25,17 @@ block content
 		.centerbox
 			form(method='get',action='/search')
 				div
-					input#searchbox(type='text',name='query',id='searchinput')
+					input(type='text',name='query',id='searchinput')
 					button 搜索
-				div
 					button#newpost 发布信息
 		.centerbox
 			.linebox
 				span
-					a(href='javascript:;', class='汽车 车') 汽车
+					a.taglink(href='javascript:;', for='汽车 车') 汽车
 				span
-					a(href='javascript:;', class='租房 房子 房') 租房
+					a.taglink(href='javascript:;', for='租房 房子 房') 租房
 			.linebox
 				span
-					a(href='javascript:;', class='交易 买卖 甩卖') 甩卖
+					a.taglink(href='javascript:;', for='交易 买卖 甩卖') 甩卖
 				span
-					a(href='javascript:;', class='交友 社交 活动') 交友
+					a.taglink(href='javascript:;', for='交友 社交 活动') 交友

@@ -59,9 +59,13 @@ legend
 	padding: 10px 10px
 	background-color: #fafafa
 	border: 1px solid gray
+.mini-container
+	@extend .container
+	max-width: 500px
 .navbar
 	z-index: 999
-	width: 100%
+	width: 97%
+	margin: auto
 	background-color: themecolor
 	position: relative
 	top: 0
@@ -82,13 +86,19 @@ legend
 		height: 30px
 	a
 		display: block
-		width: 60px
-		padding: .2em 1em
-	.pull-right
-		float: right
+		padding: .1em .3em
 	input,button
 		margin: 0
 		padding: 0
+.msg
+	background-color: #eee
+	width: 97%
+	margin: 4px auto
+	padding: auto
+.pull-right
+	float: right
+.pull-left
+	float: left
 .prompt
 	@extend input
 	display: none
@@ -97,4 +107,4 @@ legend
 .hidden
 	display: none
 ::selection
-	background-color: yellow
+	background-color: red

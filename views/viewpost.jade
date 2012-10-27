@@ -38,12 +38,12 @@ block content
 						span.sibox
 							| #{item.date.toDateString()}
 					div
-						label 发帖人邮箱：
+						label 给TA发邮件：
 						span.sibox
 							-var mailargs = 'subject=RE:'+encodeURIComponent(item.title)+'&body=http://www.checkcheck.us/post/'+item._id
 							a(href='mailto:#{item.email}?'+mailargs) #{item.email}
 					div
-						label 发帖人手机号：
+						label 手机号：
 						span.sibox
 							| #{item.cellnum}
 				fieldset
@@ -53,3 +53,4 @@ block content
 					-if(item.hasimg)
 						div
 							img.ip(src='/img/#{item._id}',width='50%')
+			include disqus

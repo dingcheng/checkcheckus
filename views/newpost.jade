@@ -3,7 +3,7 @@ extends layout
 block scripts
 	script(src='/javascripts/jquery.validate.min.js')
 	script(src='/javascripts/bootstrap-tagmanager2.js')
-	script(src='/javascripts/posting.js')
+	script(src='/javascripts/newpostscript.js')
 
 block stylesheet
 	link(rel='stylesheet', href='/stylesheets/postview.css')
@@ -30,10 +30,16 @@ block content
 					div
 						label(for='email') Email
 							em.star *
-						input(type='text',name='email',id='email')
+						-if (typeof(user)!='undefined')
+							input(type='text',name='email',id='email',value=user.email,readonly='')
+						-else
+							input(type='text',name='email',id='email')
 					div
 						label(for='cellnum') 手机
-						input(type='text',name='cellnum',id='cellnum')
+						-if (typeof(user)!='undefined'&&user.cellnum)
+							input(type='text',name='cellnum',id='cellnum',value=user.cellnum,readonly='')
+						-else
+							input(type='text',name='cellnum',id='cellnum')
 					div
 						label(for='zipcode') Zip Code
 							em.star *

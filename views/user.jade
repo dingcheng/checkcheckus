@@ -1,0 +1,28 @@
+extends layout
+
+block stylesheet
+	link(rel='stylesheet', href='/stylesheets/searchresult.css')
+	link(rel='stylesheet', href='/stylesheets/postview.css')
+
+block scripts
+	script
+		$(document).ready(function(){
+			$('.newpost :empty').hide();
+			});
+
+block content
+	include navbar
+	.mini-container
+		form.newpost
+			fieldset
+				legend 用户信息
+				div
+					label Email
+					span.sibox
+						| #{user.email}
+				div
+					label 手机号码
+					span.sibox
+						| #{user.cellnum}
+	.container
+		include nextpage

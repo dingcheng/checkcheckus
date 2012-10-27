@@ -33,6 +33,8 @@ exports.newpost_postreq=function(req,res){
 		acti: false,
 		actcode: jsha.SHA1().b64(Date())
 	};
+	//if it's a registered user, no need to send activation email
+	if (req.user) postObj.acti=true;
 	//Save image to post only if there is one, and the size is in range (0,5) MB.
 	if (post.imdata){
 		var encodeheader = 'data:'+post.ctype+';base64,';
@@ -57,12 +59,12 @@ exports.newpost_postreq=function(req,res){
 	//Otherwise, save only text part of the post
 	new Post(postObj).save(function(err, result){
 		if(err)
-			res.render('err',
+			return res.render('err',
 				{title: "500 - Internal Server Error",
 				errmsg:'Cannot save data to db. '+err,
 				showFullNav: false, status: 500, url: req.url}
 				);
-		else
+		if(!req.user)
 		{
 			var actlink = config.domain+"/activate/"+result._id+"/"+encodeURIComponent(postObj.actcode);
 			var mailOptions = {
@@ -82,8 +84,8 @@ exports.newpost_postreq=function(req,res){
 							);
 					}
 			});
-			res.redirect('/preview/'+result._id);
 		}
+		return res.redirect('/preview/'+result._id);
 	});
 }
 

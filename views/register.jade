@@ -1,0 +1,31 @@
+extends layout
+
+block scripts
+	script(src='/javascripts/jquery.validate.min.js')
+	script(src='/javascripts/regscript.js')
+
+block stylesheet
+	link(rel='stylesheet', href='/stylesheets/postview.css')
+
+block content
+	include navbar
+	.mini-container
+		form.newpost(method='post',id='regform')
+			fieldset
+				legend 注册账号
+				div
+					label(for='email') Email
+						em.star *
+					input.medium(type='text',name='email',id='email')
+				div
+					label(for='cellnum') 手机
+					input.medium(type='text',name='cellnum',id='cellnum')
+				div
+					label(for='passwd') 密码
+						em.star *
+					input.medium(type='password',name='passwd',id='passwd')
+				div
+					label(for='passveri') 确认密码
+						em.star *
+					input.medium(type='password',name='passveri',id='passveri')
+				a.bigbtn#go(href='javascript:;') 继续

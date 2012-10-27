@@ -38,15 +38,11 @@ var PostSchema = new Schema({
 	actcode:	String
 }, {expires: '15d'});
 
-
+//Validate title
 PostSchema.path('title').validate(function(title){
 	return title.length > 0;
 }, 'Post title cannot be blank');
-
-// PostSchema.path('content').validate(function(content){
-// 	return content.length > 0;
-// }, 'Post content cannot be blank');
-
+//Validate email address
 PostSchema.path('email').validate(function(email){
 	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	return re.test(email);
@@ -64,21 +60,10 @@ PostSchema.pre('save', function(next){
 });
 
 //Automatically extract keywords from title
-PostSchema.pre('save', function(next){
-	this.tkeys = extractKeywords(this.title);
-	next();
-});
-
 //Automatically extract keywords from content
 PostSchema.pre('save', function(next){
+	this.tkeys = extractKeywords(this.title);
 	this.ckeys = extractKeywords(this.content);
-	next();
-});
-
-//To-do
-//Identify a user using email as ID, then push the new post into the user's post list
-PostSchema.pre('save', function(next){
-
 	next();
 });
 

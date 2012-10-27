@@ -89,7 +89,8 @@ a:visited {
   background-color: #f5deb3;
   color: #222;
 }
-.container {
+.container,
+.mini-container {
   max-width: 940px;
   min-width: 500px;
   margin: auto;
@@ -98,9 +99,13 @@ a:visited {
   background-color: #fafafa;
   border: 1px solid #808080;
 }
+.mini-container {
+  max-width: 500px;
+}
 .navbar {
   z-index: 999;
-  width: 100%;
+  width: 97%;
+  margin: auto;
   background-color: #6cf;
   position: relative;
   top: 0;
@@ -124,16 +129,24 @@ a:visited {
 }
 .navbar a {
   display: block;
-  width: 60px;
-  padding: 0.2em 1em;
-}
-.navbar .pull-right {
-  float: right;
+  padding: 0.1em 0.3em;
 }
 .navbar input,
 .navbar button {
   margin: 0;
   padding: 0;
+}
+.msg {
+  background-color: #eee;
+  width: 97%;
+  margin: 4px auto;
+  padding: auto;
+}
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
 }
 .prompt {
   display: none;
@@ -144,7 +157,7 @@ a:visited {
   display: none;
 }
 ::selection {
-  background-color: #ff0;
+  background-color: #f00;
 }
 body {
   font-size: 100%;
@@ -156,9 +169,6 @@ fieldset {
   padding: 1px 1px;
   display: inline;
   border: 1px dashed #808080;
-}
-#container {
-  min-height: 96%;
 }
 #searchbar {
   margin: 2px 0;

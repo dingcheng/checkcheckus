@@ -1,10 +1,11 @@
 extends layout
 
 block content
-	#container
+	include navbar
+	.container
 		h1=title
 		h2
-			| #{errmsg}
+			blockquote #{errmsg}
 			br
 			a(href='javascript:window.history.back();') 后退
 			|  或者 

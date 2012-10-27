@@ -4,7 +4,21 @@
 			a(href='/') 主页
 		li.plump
 			a(href='/newpost') 新帖
-		li.pull-right
-			form(method='get',action='/search')
-				input(type='text',name='query')
-				button 搜索
+		//- li
+		//- 	form(method='get',action='/search')
+		//- 		input(type='text',name='query')
+		//- 		button 搜索
+	ul.pull-right
+		-if(typeof(user)!='undefined')
+			li.plump
+				a(href='/user/') （#{user.email}）
+			li.plump
+				a(href='/logout') 退出
+		-else
+			li.plump
+				a(href='/register') 注册
+			li.plump
+				a(href='/login') 登录
+-if (message)
+	.msg
+		| #{message}

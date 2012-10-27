@@ -175,7 +175,7 @@ $(document).ready(function(){
 
 $(window).on('beforeunload',function(){
 	var dirty = false;
-	$('input:not(:submit),textarea').each(function(){
+	$('input:not(:submit):not(:readonly),textarea').each(function(){
 		dirty = dirty||$.trim($(this).val())!="";
 	});
 	if (dirty)

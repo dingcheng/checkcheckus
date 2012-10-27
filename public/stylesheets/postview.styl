@@ -5,7 +5,7 @@ form.newpost
 		margin-bottom: 10px
 		border: 1px dashed black
 		text-align: left
-		min-width: 640px
+		//min-width: 640px
 	label
 		background-color: white
 		text-align: left
@@ -15,6 +15,8 @@ form.newpost
 		min-width: 120px
 	input
 		width: 360px
+	input.medium
+		width: 220px
 	input.short
 		width: 120px
 	textarea
@@ -40,6 +42,13 @@ em.star
 	background-color: themecolor
 	box-shadow: none
 	min-width: 0
+.btn
+	@extend input
+.bigbtn
+	@extend input
+	min-width: 120px
+	display: inline-block
+	text-align: center
 .floatLeft
 	float: left
 	width: 70%

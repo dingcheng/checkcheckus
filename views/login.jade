@@ -1,0 +1,25 @@
+extends layout
+
+block scripts
+	script(src='/javascripts/jquery.validate.min.js')
+
+block stylesheet
+	link(rel='stylesheet', href='/stylesheets/postview.css')
+
+block content
+	include navbar
+	.mini-container
+		form.newpost(method='post',id='loginform')
+			fieldset
+				legend 登陆
+				div
+					label(for='email') Email
+						em.star *
+					input.medium(type='text',name='login',id='email')
+				div
+					label(for='passwd') 密码
+						em.star *
+					input.medium(type='password',name='passwd',id='passwd')
+				.pull-right
+					button 继续
+					a.btn(href='javascript:;') 忘记密码
